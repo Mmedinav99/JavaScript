@@ -1,22 +1,20 @@
 <!DOCTYPE html>
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta charset="utf-8" />
 <title>WDV221 Intro Javascript - Variables and Data Types Assignment</title>
 
 <style>
-
-body {background-color:#FC6;
+body {
+  background-color:#FC6;
 }
-
-.highlightTitle	{
-	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
-	font-style:italic;
-	font-size:14px;
-	text-decoration:underline;
-	color:#096;
+.highlightTitle {
+  font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+  font-style:italic;
+  font-size:14px;
+  text-decoration:underline;
+  color:#096;
 }
-
-
 </style>
 </head>
 
@@ -28,18 +26,61 @@ body {background-color:#FC6;
 <p>Submit this assignment on Canvas. Please include a link to your homework page.</p>
 <h3>For each exercise use a comment line to put the Exercise number within the script. Also place a short description of what the script is doing.</h3>
 <hr />
-<p>1. Define a variable called schoolName. Display the variable in the console. *Review the value of a variable that has been defined but has not been assigned a value.</p>
-<p>2. Assign &quot;DMACC&quot; to schoolName. Display the variable in the console.  *The quotes make this a String data type.</p>
-<p>3. Assign the value 42 to schoolName. Display the variable in the console. *This changes the datatype of the variable from a String to a number. Notice that a JavaScript variable changes datatype based upon it contents.</p>
+
+<p>1. Define a variable called schoolName. Display the variable in the console.</p>
+<p>2. Assign "DMACC" to schoolName. Display the variable in the console.</p>
+<p>3. Assign the value 42 to schoolName. Display the variable in the console.</p>
 <p>4. Define a variable called courseName and assign it a value of 'WDV221 Intro Javascript'. Use document.write() to display the value of the variable within the following paragraph instead of courseName shown below.</p>
-	<p>Hello! Welcome to <em>courseName</em>.</p>
-<p>5. Define a variable called testScore and assign it a value of 100.00. Use console.log() to display the value of the variable. *Notice how JavaScript treats the .00.</p>
-<p>6. Define a variable called courseGrade. Assign it a value of 88.65. Use console.log() to display the value of the variable. *Notice how JavaScript treats this number.</p>
-<p>7. Define a variable called courseCompleted. Give it a value of false. Use console.log() to display the value of the variable. *Notice this is NOT a String datatype. true and false are reserved word within Javascript.</p>
-<p>8. Assign a value of &quot;false&quot; to courseCompleted. Make sure and use the &quot;&quot; to make this a String datatype. Use console.log() to display the value of the variable. *Notice the difference between 7 and 8.</p>
-<p>9. Create a variable called stringType. Assign it a value that makes the variable String data type. Use console.log() to display the variable stringType</p>
-<p>10. Create a variable called numberType. Assign it a value that makes the variable a number data type. Use console.log() to display the variable numberType.</p>
-<p>&nbsp;</p>
+<p>Hello! Welcome to <em id="courseSpot">courseName</em>.</p>
+<p>5. Define a variable called testScore and assign it a value of 100.00. Display in the console.</p>
+<p>6. Define a variable called courseGrade. Assign it 88.65. Display in the console.</p>
+<p>7. Define a variable called courseCompleted. Assign false. Display in the console.</p>
+<p>8. Assign "false" (as a string) to courseCompleted. Display in the console.</p>
+<p>9. Create a variable called stringType. Assign a string. Display in the console.</p>
+<p>10. Create a variable called numberType. Assign a number. Display in the console.</p>
+
+<script>
+// Exercise 1: Define variable but don't assign value
+let schoolName;
+console.log("Exercise 1:", schoolName);
+
+// Exercise 2: Assign a string value
+schoolName = "DMACC";
+console.log("Exercise 2:", schoolName);
+
+// Exercise 3: Assign a number value
+schoolName = 42;
+console.log("Exercise 3:", schoolName);
+
+// Exercise 4: Define courseName and display it in the page
+let courseName = "WDV221 Intro Javascript";
+document.getElementById("courseSpot").textContent = courseName;
+console.log("Exercise 4:", courseName);
+
+// Exercise 5: Number with .00
+let testScore = 100.00;
+console.log("Exercise 5:", testScore);
+
+// Exercise 6: Number with decimal
+let courseGrade = 88.65;
+console.log("Exercise 6:", courseGrade);
+
+// Exercise 7: Boolean false
+let courseCompleted = false;
+console.log("Exercise 7:", courseCompleted);
+
+// Exercise 8: String "false"
+courseCompleted = "false";
+console.log("Exercise 8:", courseCompleted);
+
+// Exercise 9: String variable
+let stringType = "This is a string.";
+console.log("Exercise 9:", stringType);
+
+// Exercise 10: Number variable
+let numberType = 2025;
+console.log("Exercise 10:", numberType);
+</script>
 
 </body>
 </html>
