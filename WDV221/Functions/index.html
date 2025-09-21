@@ -61,11 +61,13 @@ function printStudentInfo() {
 		"<p>Student Email: " + studentEmail + "</p>";
 }
 
-// Runtime scripts: Run when page loads
-displayGreeting();     // Exercise 1
-getStudentName();      // Exercise 2
-getStudentEmail();     // Exercise 4
-printStudentInfo();    // Exercise 6
+ 
+window.onload = function() {
+	displayGreeting();     // Exercise 1
+	getStudentName();      // Exercise 2
+	getStudentEmail();     // Exercise 4
+	printStudentInfo();    // Exercise 6
+};
 </script>
 </head>
 
@@ -76,18 +78,18 @@ printStudentInfo();    // Exercise 6
   <h2>Unit-3 Introduction to JavaScript Functions</h2>
 
   <p>Tasks:</p>
-  <p>1. Run the displayGreeting( ) as a run time script.  </p>
-  <p>2. Run the getStudentName( ) as a run time script.</p>
-  <p>3. Write a function called getStudentEmail( ).</p>
-  <p>4. Run the getStudentEmail( ) as a run time script.</p>
-  <p>5. Write a function called displayEmail( ). The button below will call the function when clicked.</p>
+  <p>1. Run the displayGreeting( ) as a run time script.  ✅</p>
+  <p>2. Run the getStudentName( ) as a run time script. ✅</p>
+  <p>3. Write a function called getStudentEmail( ). ✅</p>
+  <p>4. Run the getStudentEmail( ) as a run time script. ✅</p>
+  <p>5. Write a function called displayEmail( ). The button below will call the function when clicked. ✅</p>
   <p>
 	<input type="button" value="Display Email" onClick="displayEmail()">
   </p>
-  <p>6. Write a function called printStudentInfo( ). The function should write the studentName and studentEmail to the web page.</p>
+  <p>6. Write a function called printStudentInfo( ). The function should write the studentName and studentEmail to the web page. ✅</p>
   <div id="studentInfo"></div> <!-- placeholder for Exercise 6 -->
   
-  <p>7. Fix the button element that will run the displayEmailServer( ) with a click event handler.</p>
+  <p>7. Fix the button element that will run the displayEmailServer( ) with a click event handler. ✅</p>
   <p>
     <input type="button" value="Display Email Server" onclick="displayEmailServer()">
   </p>
