@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>WDV221 Intro Javascript - Unit 4</title>
+
+	<style>
+		span { font-style: italic; }
+	</style>
+
+	<script>
+		/* Global Variables */
+		let schoolName = "DMACC";
+		let firstName = "Martin";   
+		let lastName = "Medina";    
+		let totalSales = 5235.6;    
+
+		// Example 1 function
+		function formatRosterName(in_first_name, in_last_name) {
+			return in_last_name + ", " + in_first_name;
+		}
+	
+		function printSchoolRoster(inFirstName, inLastName, inSchoolName) {
+			let rosterName = formatRosterName(inFirstName, inLastName);
+			let detailLine = rosterName + " " + inSchoolName;
+			return detailLine;
+		}
+		
+		// Example 2 function
+		function displayName(fName, lName) {
+			let nameOutput = fName + " " + lName;
+			alert("Name: " + nameOutput);
+			console.log("Display Name (button clicked): " + nameOutput);
+		}
+
+		// Example 3 function
+		function displaySchool(inValue) {
+			console.log("Display School (button clicked): " + inValue);
+		}
+
+		// Example 4 function
+		function printName(inFirstName, inLastName) {
+			let fullName = inFirstName + " " + inLastName;
+			console.log("Full Name (runtime): " + fullName);
+		}
+
+		// Example 5 function
+		function formatCurrency(inNumber) {
+			return inNumber.toLocaleString("en-US", {style:"currency", currency:"USD"});
+		}
+
+		// Runtime script
+		window.onload = function() {
+			// Example 1: Display formatted roster name in span + log it
+			let rosterOutput = formatRosterName(firstName, lastName);
+			document.getElementById("studentName").textContent = rosterOutput;
+			console.log("Roster Name (runtime): " + rosterOutput);
+
+			// Example 4: Call printName() at runtime
+			printName(firstName, lastName);
+
+			// Example 5: Display formatted sales + log it
+			let salesOutput = formatCurrency(totalSales);
+			document.getElementById("salesValue").textContent = salesOutput;
+			console.log("Formatted Sales (runtime): " + salesOutput);
+		}
+	
+	</script>
+</head>
+
+<body>
+	<h1>WDV221 Intro Javascript</h1>
+	<h2>Unit-4 Assignment - Functions &amp; Parameters </h2>
+
+	<p>Example 1</p>
+	<h4>Student Name: <span id="studentName">display name here</span></h4>
+	
+	<p>Example 2</p>
+	<button onclick="displayName(firstName, lastName)">Display Name</button>
+	
+	<p>Example 3</p>
+	<button onclick="displaySchool(schoolName)">Display School</button>
+	
+	<p>Example 5</p>
+	<h3>Your Total Sales: <span id="salesValue">display formatted value here</span></h3>
+</body>
+</html>
