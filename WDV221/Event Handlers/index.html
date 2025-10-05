@@ -1,114 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Event Handlers Assignment</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-  }
-  button {
-    padding: 10px 15px;
-    font-size: 16px;
-  }
-  p {
-    width: 300px;
-    padding: 10px;
-    background-color: #eef;
-    border: 1px solid #99c;
-  }
-  img {
-    width: 150px;
-    margin-top: 15px;
-    border: 2px solid #ccc;
-  }
-  select {
-    margin-top: 15px;
-    padding: 5px;
-    font-size: 16px;
-  }
-</style>
-
-<script>
-  // Run when body finishes loading
-  function setupHandlers() {
-    console.log("Page loaded - onload handler triggered.");
-
-    // 1️⃣ Button JavaScript onclick property event handler
-    const myButton = document.getElementById("dualButton");
-    myButton.onmouseover = jsMouseOverHandler;
-
-    // 2️⃣ Paragraph JavaScript event handler
-    const myParagraph = document.getElementById("hoverPara");
-    myParagraph.onmouseleave = jsMouseLeaveHandler;
-
-    // 3️⃣ Image event using addEventListener()
-    const myImage = document.getElementById("koalaImg");
-    myImage.addEventListener("click", imageClickHandler);
-
-    // 4️⃣ Select change event
-    const mySelect = document.getElementById("colorSelect");
-    mySelect.addEventListener("change", selectChangeHandler);
-  }
-
-  // HTML event handlers
-  function htmlButtonClickHandler() {
-    console.log("HTML Event Handler: Button clicked!");
-  }
-
-  function htmlMouseOverHandler() {
-    console.log("HTML Event Handler: Paragraph mouseover detected!");
-  }
-
-  // JavaScript event handlers
-  function jsMouseOverHandler() {
-    console.log("JS Event Handler: Button mouseover triggered!");
-  }
-
-  function jsMouseLeaveHandler() {
-    console.log("JS Event Handler: Paragraph mouseleave detected!");
-  }
-
-  function imageClickHandler() {
-    console.log("JS Event Handler (addEventListener): Image clicked!");
-  }
-
-  function selectChangeHandler() {
-    const selected = document.getElementById("colorSelect").value;
-    console.log("JS Event Handler (addEventListener): Option changed to '" + selected + "'");
-  }
-</script>
+  <meta charset="UTF-8">
+  <title>Event Handler Assignment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    img {
+      width: 200px;
+      height: auto;
+      margin-top: 10px;
+    }
+  </style>
 </head>
+<body onload="initializeHandlers()">
 
-<body onload="setupHandlers()">
-  <h1>Event Handlers Demonstration</h1>
+  <h1>Event Handler Assignment</h1>
 
-  <!-- 1️⃣ Button with HTML onclick + JS mouseover -->
-  <button id="dualButton" onclick="htmlButtonClickHandler()">Click Me!</button>
+  <!-- Button with HTML click handler -->
+  <button onclick="htmlClickHandler()">Click Me</button>
 
-  <hr>
-
-  <!-- 2️⃣ Paragraph with HTML mouseover + JS mouseleave -->
-  <p id="hoverPara" onmouseover="htmlMouseOverHandler()">
-    Hover your mouse over or move it away from this paragraph.
+  <!-- Paragraph with HTML mouseover handler -->
+  <p onmouseover="htmlMouseOverHandler()" id="hoverText">
+    Hover over this paragraph.
   </p>
 
-  <hr>
+  <!-- Image with JavaScript addEventListener -->
+  <img src="https://via.placeholder.com/200" alt="Placeholder Image" id="eventImage">
 
-  <!-- 3️⃣ Image with addEventListener -->
-  <img id="koalaImg" src="https://upload.wikimedia.org/wikipedia/commons/4/49/Koala_climbing_tree.jpg" alt="Koala">
-
-  <hr>
-
-  <!-- 4️⃣ Select dropdown with change event -->
+  <!-- Select element with default and three options -->
   <label for="colorSelect">Choose a color:</label>
   <select id="colorSelect">
-    <option value="">-- Select a color --</option>
-    <option value="Red">Red</option>
-    <option value="Green">Green</option>
-    <option value="Blue">Blue</option>
+    <option value="">--Select a color--</option>
+    <option value="red">Red</option>
+    <option value="green">Green</option>
+    <option value="blue">Blue</option>
   </select>
+
+  <script>
+    // HTML event handler functions
+    function htmlClickHandler() {
+      console.log("HTML click event handler triggered on button.");
+    }
+
+    function htmlMouseOverHandler() {
+      console.log("HTML mouseover event handler triggered on paragraph.");
+    }
+
+    // JavaScript event handler setup
+    function initializeHandlers() {
+      // Button mouseover event using JS onclick property
+      const button = document.querySelector("button");
+      button.onmouseover = function () {
+        console.log("JavaScript mouseover event handler triggered on button.");
+      };
+
+      // Paragraph mouseleave event using JS property
+      const paragraph = document.getElementById("hoverText");
+      paragraph.onmouseleave = function () {
+        console.log("JavaScript mouseleave event handler triggered on paragraph.");
+      };
+
+      // Image event using addEventListener
+      const image = document.getElementById("eventImage");
+      image.addEventListener("click", function () {
+        console.log("JavaScript addEventListener click event triggered on image.");
+      });
+
+      // Select change event
+      const select = document.getElementById("colorSelect");
+      select.onchange = function () {
+        console.log(`JavaScript change event handler triggered. Selected value: ${this.value}`);
+      };
+    }
+  </script>
+
 </body>
 </html>
