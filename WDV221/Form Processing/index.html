@@ -5,154 +5,186 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WDV221 - Assignment 6-1 Form Processing</title>
 
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <style>
     body {
-        font-family: Arial, sans-serif;
         background-color: #f8f9fa;
         padding: 20px;
     }
-
-    h1 {
-        text-align: center;
-        color: #333;
-    }
-
-    form {
+    .form-container {
         background: white;
-        padding: 20px;
+        padding: 30px;
         border-radius: 12px;
-        max-width: 600px;
+        max-width: 650px;
         margin: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
         box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-
-    label {
-        font-weight: bold;
-    }
-
-    input, select, button {
-        padding: 10px;
-        font-size: 1rem;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-    }
-
-    .radio-group {
-        display: flex;
-        gap: 10px;
-    }
-
-    .buttons {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    button {
-        background-color: #007bff;
-        color: white;
-        border: none;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    button:hover {
-        background-color: #0056b3;
-    }
-
-    @media (max-width: 600px) {
-        form {
-            padding: 15px;
-        }
-        .buttons {
-            flex-direction: column;
-            gap: 10px;
-        }
+    .error-label {
+        color: red;
+        font-size: 0.9em;
+        display: none;
     }
 </style>
 </head>
 
 <body>
-<h1>Product Order Form</h1>
+<div class="container">
+    <h1 class="text-center mb-4">Product Order Form</h1>
 
-<form id="orderForm">
-
-    <label for="company">Company Name:</label>
-    <input type="text" id="company" name="company" placeholder="Enter company name" required>
-
-    <label for="email">Contact Email:</label>
-    <input type="email" id="email" name="email" placeholder="example@email.com" required>
-
-    <label for="phone">Contact Phone:</label>
-    <input type="tel" id="phone" name="phone" placeholder="555-555-5555" required>
-
-    <label for="orderDate">Order Date:</label>
-    <input type="date" id="orderDate" name="orderDate" required>
-
-    <label for="product">Select Product:</label>
-    <select id="product" name="product" required>
-        <option value="">--Select a Product--</option>
-        <option value="2.49">Name Badge Lanyard</option>
-        <option value="1.34">Customized Pen</option>
-        <option value="3.87">Can Koozie</option>
-        <option value="0.48">Custom Decal</option>
-    </select>
-
-    <label for="quantity">Order Quantity:</label>
-    <input type="number" id="quantity" name="quantity" min="1" value="1" required>
-
-    <label>Discount:</label>
-    <div class="radio-group">
-        <label><input type="radio" name="discount" value="0" checked> No Discount</label>
-        <label><input type="radio" name="discount" value="10"> 10% Discount</label>
-        <label><input type="radio" name="discount" value="15"> 15% Discount</label>
+    <!-- Success Alert -->
+    <div id="successAlert" class="alert alert-success text-center d-none" role="alert">
+        ✅ Order submitted successfully!
     </div>
 
-    <div class="buttons">
-        <button type="button" id="processBtn">Process Order</button>
-        <button type="reset" id="newFormBtn">New Form</button>
-    </div>
-</form>
+    <form id="orderForm" class="form-container">
+
+        <!-- Company Name -->
+        <div class="mb-3">
+            <label for="company" class="form-label">Company Name:</label>
+            <input type="text" class="form-control" id="company" placeholder="Enter company name">
+            <div class="error-label" id="companyError">* Please enter your company name.</div>
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3">
+            <label for="email" class="form-label">Contact Email:</label>
+            <input type="email" class="form-control" id="email" placeholder="example@email.com">
+            <div class="error-label" id="emailError">* Please enter a valid email.</div>
+        </div>
+
+        <!-- Phone -->
+        <div class="mb-3">
+            <label for="phone" class="form-label">Contact Phone:</label>
+            <input type="tel" class="form-control" id="phone" placeholder="555-555-5555">
+            <div class="error-label" id="phoneError">* Please enter a valid phone number.</div>
+        </div>
+
+        <!-- Date -->
+        <div class="mb-3">
+            <label for="orderDate" class="form-label">Order Date:</label>
+            <input type="date" class="form-control" id="orderDate">
+            <div class="error-label" id="dateError">* Please select an order date.</div>
+        </div>
+
+        <!-- Product Dropdown -->
+        <div class="mb-3">
+            <label for="product" class="form-label">Select Product:</label>
+            <select class="form-select" id="product">
+                <option value="">--Select a Product--</option>
+                <option value="2.49">Name Badge Lanyard</option>
+                <option value="1.34">Customized Pen</option>
+                <option value="3.87">Can Koozie</option>
+                <option value="0.48">Custom Decal</option>
+            </select>
+            <div class="error-label" id="productError">* Please select a product.</div>
+        </div>
+
+        <!-- Quantity -->
+        <div class="mb-3">
+            <label for="quantity" class="form-label">Order Quantity:</label>
+            <input type="number" class="form-control" id="quantity" min="1" value="1">
+            <div class="error-label" id="quantityError">* Please enter a quantity (1 or more).</div>
+        </div>
+
+        <!-- Discount -->
+        <div class="mb-3">
+            <label class="form-label d-block">Discount:</label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="discount" id="noDisc" value="0" checked>
+                <label class="form-check-label" for="noDisc">No Discount</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="discount" id="disc10" value="10">
+                <label class="form-check-label" for="disc10">10% Discount</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="discount" id="disc15" value="15">
+                <label class="form-check-label" for="disc15">15% Discount</label>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex justify-content-between">
+            <button type="button" id="processBtn" class="btn btn-primary">Process Order</button>
+            <button type="reset" id="newFormBtn" class="btn btn-secondary">New Form</button>
+        </div>
+
+    </form>
+</div>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    // Display selected product and price
+    const form = document.getElementById("orderForm");
+    const successAlert = document.getElementById("successAlert");
+
+    // Function: Show/Hide Error Labels
+    function showError(id, show) {
+        document.getElementById(id).style.display = show ? "block" : "none";
+    }
+
+    // Product Selection Logging
     document.getElementById("product").addEventListener("change", function() {
         const selectedOption = this.options[this.selectedIndex];
-        console.log("Selected Product:", selectedOption.text);
-        console.log("Price:", selectedOption.value);
+        if (selectedOption.value) {
+            console.log("Selected Product:", selectedOption.text);
+            console.log("Price:", selectedOption.value);
+        }
     });
 
     // Process Order Button
     document.getElementById("processBtn").addEventListener("click", function() {
-        const company = document.getElementById("company").value;
-        const email = document.getElementById("email").value;
-        const phone = document.getElementById("phone").value;
-        const orderDate = document.getElementById("orderDate").value;
+        let valid = true;
+        successAlert.classList.add("d-none"); // Hide success message if visible
+
+        // Field references
+        const company = document.getElementById("company");
+        const email = document.getElementById("email");
+        const phone = document.getElementById("phone");
+        const orderDate = document.getElementById("orderDate");
         const productSelect = document.getElementById("product");
-        const product = productSelect.options[productSelect.selectedIndex].text;
-        const price = productSelect.value;
-        const quantity = document.getElementById("quantity").value;
+        const quantity = document.getElementById("quantity");
         const discount = document.querySelector('input[name="discount"]:checked').value;
 
+        // Validation checks
+        if (company.value.trim() === "") { showError("companyError", true); valid = false; } else { showError("companyError", false); }
+        if (email.value.trim() === "") { showError("emailError", true); valid = false; } else { showError("emailError", false); }
+        if (phone.value.trim() === "") { showError("phoneError", true); valid = false; } else { showError("phoneError", false); }
+        if (orderDate.value === "") { showError("dateError", true); valid = false; } else { showError("dateError", false); }
+        if (productSelect.value === "") { showError("productError", true); valid = false; } else { showError("productError", false); }
+        if (quantity.value < 1 || quantity.value === "") { showError("quantityError", true); valid = false; } else { showError("quantityError", false); }
+
+        // Stop if invalid
+        if (!valid) {
+            console.log("⚠️ Form not submitted. Please fill all required fields.");
+            return;
+        }
+
+        // Log values to console
         console.log("----- Order Details -----");
-        console.log("Company Name:", company);
-        console.log("Email:", email);
-        console.log("Phone:", phone);
-        console.log("Order Date:", orderDate);
-        console.log("Product:", product);
-        console.log("Price per unit:", price);
-        console.log("Quantity:", quantity);
+        console.log("Company Name:", company.value);
+        console.log("Email:", email.value);
+        console.log("Phone:", phone.value);
+        console.log("Order Date:", orderDate.value);
+        console.log("Product:", productSelect.options[productSelect.selectedIndex].text);
+        console.log("Price per unit:", productSelect.value);
+        console.log("Quantity:", quantity.value);
         console.log("Discount:", discount + "%");
         console.log("--------------------------");
+
+        // Show success message
+        successAlert.classList.remove("d-none");
     });
 
-    // Reset Form
+    // Reset Button
     document.getElementById("newFormBtn").addEventListener("click", function() {
+        document.querySelectorAll(".error-label").forEach(label => label.style.display = "none");
+        successAlert.classList.add("d-none");
         console.log("Form reset to default values.");
     });
 </script>
-
 </body>
 </html>
