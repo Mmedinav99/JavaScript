@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>WDV221 Intro Javascript - Operators and Textfields Assignment</title>
+	<style>
+		body {
+			background-color: #C99;
+			font-family: Arial, sans-serif;
+		}
+		span {
+			display: inline-block;
+			background-color: #fff;
+			border: 1px solid #333;
+			padding: 5px 10px;
+			margin-left: 10px;
+			min-width: 50px;
+		}
+	</style>
+
+	<script>
+		// Global variable for Exercise 5
+		let count = 0;
+
+		// 1. Display value1
+		function displayValue1() {
+			const value1 = document.getElementById("value1").value;
+			document.getElementById("output1").value = value1;
+		}
+
+		// 2. Display value2
+		function displayValue2() {
+			const value2 = document.getElementById("value2").value;
+			document.getElementById("output2").value = value2;
+		}
+
+		// 3. Multiply value1 * value2
+		function multiplyValues() {
+			const value1 = parseFloat(document.getElementById("value1").value);
+			const value2 = parseFloat(document.getElementById("value2").value);
+			document.getElementById("output3").textContent = value1 * value2;
+		}
+
+		// 4. Add value1 + value2
+		function addValues() {
+			const value1 = parseFloat(document.getElementById("value1").value);
+			const value2 = parseFloat(document.getElementById("value2").value);
+			document.getElementById("output4").textContent = value1 + value2;
+		}
+
+		// 5. Increment count
+		function incrementCount() {
+			count++;
+			document.getElementById("output5").textContent = count;
+		}
+
+		// 6. Random number 1–10
+		function randomNumber() {
+			const random = Math.floor(Math.random() * 10) + 1;
+			document.getElementById("output6").textContent = random;
+		}
+
+		// Optional: Reset everything visually
+		function resetForm() {
+			count = 0;
+			document.querySelectorAll("span").forEach(span => span.textContent = "");
+		}
+	</script>
+</head>
+
+<body>
+<h2>WDV221 Intro Javascript</h2>
+<h3>Form Processing, Operators</h3>
+<hr />
+<p>Include a comment in each script with the exercise number and a description of what the script is supposed to do.</p>
+<hr />
+
+<form name="form1" method="post" onreset="resetForm()">
+	<p>Enter a number for value1:
+		<input type="text" id="value1" />
+	</p>
+	<p>Enter a number for value2:
+		<input type="text" id="value2" />
+	</p>
+
+	<p>1.
+		<input type="button" value="Display value1" onclick="displayValue1()" />
+		Display the value you entered for value1:
+		<input type="text" id="output1" readonly />
+	</p>
+
+	<p>2.
+		<input type="button" value="Display value2" onclick="displayValue2()" />
+		Display the value you entered for value2:
+		<input type="text" id="output2" readonly />
+	</p>
+
+	<p>3.
+		<input type="button" value="Multiply" onclick="multiplyValues()" />
+		Display the value of value1 * value2:
+		<span id="output3"></span>
+	</p>
+
+	<p>4.
+		<input type="button" value="Add" onclick="addValues()" />
+		Display the results of value1 + value2:
+		<span id="output4"></span>
+	</p>
+
+	<p>5.
+		<input type="button" value="Increment count" onclick="incrementCount()" />
+		Use the increment operator to add 1 to count and display the new value of count:
+		<span id="output5"></span>
+	</p>
+
+	<p>6.
+		<button type="button" onclick="randomNumber()">Random Number</button>
+		Display a random number between 1 and 10:
+		<span id="output6"></span>
+	</p>
+
+	<p>
+		<input type="reset" value="Try Again">
+	</p>
+</form>
+</body>
+</html>
