@@ -1,127 +1,205 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>WDV221 Intro Javascript - Operators and Textfields Assignment</title>
-	<style>
-		body {
-			background-color: #C99;
-			font-family: Arial, sans-serif;
-		}
-		span {
-			display: inline-block;
-			background-color: #fff;
-			border: 1px solid #333;
-			padding: 5px 10px;
-			margin-left: 10px;
-			min-width: 50px;
-		}
-	</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WDV221 - Operators and Textfields Assignment</title>
 
-	<script>
-		// Global variable for Exercise 5
-		let count = 0;
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-		// 1. Display value1
-		function displayValue1() {
-			const value1 = document.getElementById("value1").value;
-			document.getElementById("output1").value = value1;
-		}
-
-		// 2. Display value2
-		function displayValue2() {
-			const value2 = document.getElementById("value2").value;
-			document.getElementById("output2").value = value2;
-		}
-
-		// 3. Multiply value1 * value2
-		function multiplyValues() {
-			const value1 = parseFloat(document.getElementById("value1").value);
-			const value2 = parseFloat(document.getElementById("value2").value);
-			document.getElementById("output3").textContent = value1 * value2;
-		}
-
-		// 4. Add value1 + value2
-		function addValues() {
-			const value1 = parseFloat(document.getElementById("value1").value);
-			const value2 = parseFloat(document.getElementById("value2").value);
-			document.getElementById("output4").textContent = value1 + value2;
-		}
-
-		// 5. Increment count
-		function incrementCount() {
-			count++;
-			document.getElementById("output5").textContent = count;
-		}
-
-		// 6. Random number 1–10
-		function randomNumber() {
-			const random = Math.floor(Math.random() * 10) + 1;
-			document.getElementById("output6").textContent = random;
-		}
-
-		// Optional: Reset everything visually
-		function resetForm() {
-			count = 0;
-			document.querySelectorAll("span").forEach(span => span.textContent = "");
-		}
-	</script>
+<style>
+    body {
+        background-color: #f8f9fa;
+        padding: 20px;
+    }
+    .form-container {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        max-width: 650px;
+        margin: auto;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .output-box {
+        display: inline-block;
+        background: #e9ecef;
+        border-radius: 6px;
+        padding: 5px 10px;
+        margin-left: 10px;
+        min-width: 60px;
+        font-weight: bold;
+    }
+    .error-label {
+        color: red;
+        font-size: 0.9em;
+        display: none;
+    }
+</style>
 </head>
 
 <body>
-<h2>WDV221 Intro Javascript</h2>
-<h3>Form Processing, Operators</h3>
-<hr />
-<p>Include a comment in each script with the exercise number and a description of what the script is supposed to do.</p>
-<hr />
+<div class="container">
+    <h1 class="text-center mb-4">WDV221 - Operators & Textfields Assignment</h1>
 
-<form name="form1" method="post" onreset="resetForm()">
-	<p>Enter a number for value1:
-		<input type="text" id="value1" />
-	</p>
-	<p>Enter a number for value2:
-		<input type="text" id="value2" />
-	</p>
+    <div id="successAlert" class="alert alert-success text-center d-none" role="alert">
+        ✅ Actions executed successfully!
+    </div>
 
-	<p>1.
-		<input type="button" value="Display value1" onclick="displayValue1()" />
-		Display the value you entered for value1:
-		<input type="text" id="output1" readonly />
-	</p>
+    <form id="mathForm" class="form-container">
 
-	<p>2.
-		<input type="button" value="Display value2" onclick="displayValue2()" />
-		Display the value you entered for value2:
-		<input type="text" id="output2" readonly />
-	</p>
+        <!-- Number Inputs -->
+        <div class="mb-3">
+            <label for="value1" class="form-label">Enter a number for value 1:</label>
+            <input type="number" class="form-control" id="value1" placeholder="Enter a number">
+            <div class="error-label" id="value1Error">* Please enter a valid number.</div>
+        </div>
 
-	<p>3.
-		<input type="button" value="Multiply" onclick="multiplyValues()" />
-		Display the value of value1 * value2:
-		<span id="output3"></span>
-	</p>
+        <div class="mb-3">
+            <label for="value2" class="form-label">Enter a number for value 2:</label>
+            <input type="number" class="form-control" id="value2" placeholder="Enter a number">
+            <div class="error-label" id="value2Error">* Please enter a valid number.</div>
+        </div>
 
-	<p>4.
-		<input type="button" value="Add" onclick="addValues()" />
-		Display the results of value1 + value2:
-		<span id="output4"></span>
-	</p>
+        <hr>
 
-	<p>5.
-		<input type="button" value="Increment count" onclick="incrementCount()" />
-		Use the increment operator to add 1 to count and display the new value of count:
-		<span id="output5"></span>
-	</p>
+        <!-- 1. Display value1 -->
+        <div class="mb-3">
+            <button type="button" class="btn btn-primary" id="btnValue1">1. Display Value 1</button>
+            <input type="text" class="form-control mt-2" id="output1" placeholder="Result will appear here" readonly>
+        </div>
 
-	<p>6.
-		<button type="button" onclick="randomNumber()">Random Number</button>
-		Display a random number between 1 and 10:
-		<span id="output6"></span>
-	</p>
+        <!-- 2. Display value2 -->
+        <div class="mb-3">
+            <button type="button" class="btn btn-primary" id="btnValue2">2. Display Value 2</button>
+            <input type="text" class="form-control mt-2" id="output2" placeholder="Result will appear here" readonly>
+        </div>
 
-	<p>
-		<input type="reset" value="Try Again">
-	</p>
-</form>
+        <!-- 3. Multiply -->
+        <div class="mb-3">
+            <button type="button" class="btn btn-success" id="btnMultiply">3. Multiply Values</button>
+            <span class="output-box" id="output3"></span>
+        </div>
+
+        <!-- 4. Add -->
+        <div class="mb-3">
+            <button type="button" class="btn btn-success" id="btnAdd">4. Add Values</button>
+            <span class="output-box" id="output4"></span>
+        </div>
+
+        <!-- 5. Increment Count -->
+        <div class="mb-3">
+            <button type="button" class="btn btn-warning" id="btnIncrement">5. Increment Count</button>
+            <span class="output-box" id="output5"></span>
+        </div>
+
+        <!-- 6. Random Number -->
+        <div class="mb-3">
+            <button type="button" class="btn btn-info" id="btnRandom">6. Random Number (1–10)</button>
+            <span class="output-box" id="output6"></span>
+        </div>
+
+        <hr>
+
+        <!-- Reset -->
+        <div class="text-center">
+            <button type="reset" class="btn btn-secondary" id="resetBtn">Reset Form</button>
+        </div>
+    </form>
+</div>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Global counter for Exercise 5
+    let count = 0;
+
+    // Helper function for showing/hiding errors
+    function showError(id, show) {
+        document.getElementById(id).style.display = show ? "block" : "none";
+    }
+
+    // Validate that both inputs contain valid numbers
+    function validateInputs() {
+        let valid = true;
+        const val1 = document.getElementById("value1");
+        const val2 = document.getElementById("value2");
+
+        if (val1.value === "" || isNaN(val1.value)) {
+            showError("value1Error", true);
+            valid = false;
+        } else {
+            showError("value1Error", false);
+        }
+
+        if (val2.value === "" || isNaN(val2.value)) {
+            showError("value2Error", true);
+            valid = false;
+        } else {
+            showError("value2Error", false);
+        }
+
+        return valid;
+    }
+
+    // Exercise 1: Display value1
+    document.getElementById("btnValue1").addEventListener("click", () => {
+        const value1 = document.getElementById("value1").value;
+        if (value1 === "") {
+            showError("value1Error", true);
+            return;
+        }
+        showError("value1Error", false);
+        document.getElementById("output1").value = value1;
+    });
+
+    // Exercise 2: Display value2
+    document.getElementById("btnValue2").addEventListener("click", () => {
+        const value2 = document.getElementById("value2").value;
+        if (value2 === "") {
+            showError("value2Error", true);
+            return;
+        }
+        showError("value2Error", false);
+        document.getElementById("output2").value = value2;
+    });
+
+    // Exercise 3: Multiply
+    document.getElementById("btnMultiply").addEventListener("click", () => {
+        if (!validateInputs()) return;
+        const result = parseFloat(value1.value) * parseFloat(value2.value);
+        document.getElementById("output3").textContent = result;
+    });
+
+    // Exercise 4: Add
+    document.getElementById("btnAdd").addEventListener("click", () => {
+        if (!validateInputs()) return;
+        const result = parseFloat(value1.value) + parseFloat(value2.value);
+        document.getElementById("output4").textContent = result;
+    });
+
+    // Exercise 5: Increment count
+    document.getElementById("btnIncrement").addEventListener("click", () => {
+        count++;
+        document.getElementById("output5").textContent = count;
+    });
+
+    // Exercise 6: Random number 1–10
+    document.getElementById("btnRandom").addEventListener("click", () => {
+        const random = Math.floor(Math.random() * 10) + 1;
+        document.getElementById("output6").textContent = random;
+    });
+
+    // Reset button clears all outputs and counter
+    document.getElementById("resetBtn").addEventListener("click", () => {
+        count = 0;
+        document.querySelectorAll(".output-box").forEach(span => span.textContent = "");
+        document.getElementById("output1").value = "";
+        document.getElementById("output2").value = "";
+        document.querySelectorAll(".error-label").forEach(label => label.style.display = "none");
+        console.log("Form reset.");
+    });
+</script>
 </body>
 </html>
