@@ -9,7 +9,7 @@ function showError(id, show) {
 }
 
 // --------------------
-// Exercise 1: Compare Names
+// Exercise 1: Compare Names (Enhanced)
 // --------------------
 function compareNames() {
     const name1 = document.getElementById("name1").value.trim();
@@ -37,10 +37,13 @@ function compareNames() {
         return;
     }
 
-    // Case-insensitive comparison
-    if (name1.toLowerCase() === name2.toLowerCase()) {
-        result.textContent = "Same";
+    // Compare names
+    if (name1 === name2) {
+        result.textContent = "Same (exact match)";
         result.style.color = "green";
+    } else if (name1.toLowerCase() === name2.toLowerCase()) {
+        result.textContent = "Same letters, different capitalization";
+        result.style.color = "orange";
     } else {
         result.textContent = "Different";
         result.style.color = "blue";
