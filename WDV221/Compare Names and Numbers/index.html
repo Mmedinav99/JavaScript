@@ -43,7 +43,7 @@
     <h1 class="text-center mb-4">WDV221 - IF Statements & Validations</h1>
 
     <!-- Exercise 1: Compare Names -->
-    <form id="nameForm" class="form-container mb-5">
+    <form id="nameForm" class="form-container mb-5" onsubmit="compareNames(); return false;">
         <h3 class="mb-3 text-primary">Exercise 1: Compare Names</h3>
 
         <div class="mb-3">
@@ -59,17 +59,17 @@
         </div>
 
         <div class="mb-3">
-            <button type="button" class="btn btn-primary" id="btnCompareNames">Compare Names</button>
+            <input type="submit" class="btn btn-primary" value="Compare Names">
             <span class="output-box" id="nameResult"></span>
         </div>
 
         <div class="text-center">
-            <button type="reset" class="btn btn-secondary" id="resetNames">Reset</button>
+            <button type="reset" class="btn btn-secondary" onclick="resetNames()">Reset</button>
         </div>
     </form>
 
     <!-- Exercise 2: Compare Numbers -->
-    <form id="numberForm" class="form-container">
+    <form id="numberForm" class="form-container" onsubmit="compareNumbers(); return false;">
         <h3 class="mb-3 text-success">Exercise 2: Compare Numbers</h3>
 
         <div class="mb-3">
@@ -85,12 +85,12 @@
         </div>
 
         <div class="mb-3">
-            <button type="button" class="btn btn-success" id="btnCompareNumbers">Compare Numbers</button>
+            <input type="submit" class="btn btn-success" value="Compare Numbers">
             <span class="output-box" id="numResult"></span>
         </div>
 
         <div class="text-center">
-            <button type="reset" class="btn btn-secondary" id="resetNumbers">Reset</button>
+            <button type="reset" class="btn btn-secondary" onclick="resetNumbers()">Reset</button>
         </div>
     </form>
 </div>
@@ -98,108 +98,7 @@
 <!-- Bootstrap JS Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<script>
-// --------------------
-// Helper: Show/Hide error messages
-// --------------------
-function showError(id, show) {
-    document.getElementById(id).style.display = show ? "block" : "none";
-}
-
-// --------------------
-// Exercise 1: Compare Names
-// --------------------
-document.getElementById("btnCompareNames").addEventListener("click", () => {
-    const name1 = document.getElementById("name1").value.trim();
-    const name2 = document.getElementById("name2").value.trim();
-    const result = document.getElementById("nameResult");
-
-    let valid = true;
-
-    if (name1 === "") {
-        showError("name1Error", true);
-        valid = false;
-    } else {
-        showError("name1Error", false);
-    }
-
-    if (name2 === "") {
-        showError("name2Error", true);
-        valid = false;
-    } else {
-        showError("name2Error", false);
-    }
-
-    if (!valid) {
-        result.textContent = "";
-        return;
-    }
-
-    if (name1.toLowerCase() === name2.toLowerCase()) {
-        result.textContent = "Same";
-        result.style.color = "green";
-    } else {
-        result.textContent = "Different";
-        result.style.color = "blue";
-    }
-});
-
-document.getElementById("resetNames").addEventListener("click", () => {
-    document.getElementById("nameResult").textContent = "";
-    showError("name1Error", false);
-    showError("name2Error", false);
-});
-
-// --------------------
-// Exercise 2: Compare Numbers
-// --------------------
-document.getElementById("btnCompareNumbers").addEventListener("click", () => {
-    const num1 = document.getElementById("num1").value.trim();
-    const num2 = document.getElementById("num2").value.trim();
-    const result = document.getElementById("numResult");
-
-    let valid = true;
-
-    // Validation: both must be non-empty integers
-    if (num1 === "" || isNaN(num1) || !Number.isInteger(Number(num1))) {
-        showError("num1Error", true);
-        valid = false;
-    } else {
-        showError("num1Error", false);
-    }
-
-    if (num2 === "" || isNaN(num2) || !Number.isInteger(Number(num2))) {
-        showError("num2Error", true);
-        valid = false;
-    } else {
-        showError("num2Error", false);
-    }
-
-    if (!valid) {
-        result.textContent = "";
-        return;
-    }
-
-    const n1 = parseInt(num1);
-    const n2 = parseInt(num2);
-
-    if (n1 === n2) {
-        result.textContent = "Equal";
-        result.style.color = "green";
-    } else if (n1 > n2) {
-        result.textContent = `${n1} is larger`;
-        result.style.color = "blue";
-    } else {
-        result.textContent = `${n2} is larger`;
-        result.style.color = "blue";
-    }
-});
-
-document.getElementById("resetNumbers").addEventListener("click", () => {
-    document.getElementById("numResult").textContent = "";
-    showError("num1Error", false);
-    showError("num2Error", false);
-});
-</script>
+<!-- External JS -->
+<script src="compareFunctions.js"></script>
 </body>
 </html>
