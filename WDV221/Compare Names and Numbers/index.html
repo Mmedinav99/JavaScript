@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WDV221 - IF Statements & Validations Assignment</title>
+
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        padding: 20px;
+    }
+    .form-container {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        max-width: 650px;
+        margin: auto;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .output-box {
+        display: inline-block;
+        background: #e9ecef;
+        border-radius: 6px;
+        padding: 5px 10px;
+        margin-left: 10px;
+        min-width: 100px;
+        font-weight: bold;
+    }
+    .error-label {
+        color: red;
+        font-size: 0.9em;
+        display: none;
+    }
+</style>
+</head>
+
+<body>
+<div class="container">
+    <h1 class="text-center mb-4">WDV221 - IF Statements & Validations</h1>
+
+    <!-- Exercise 1: Compare Names -->
+    <form id="nameForm" class="form-container mb-5">
+        <h3 class="mb-3 text-primary">Exercise 1: Compare Names</h3>
+
+        <div class="mb-3">
+            <label for="name1" class="form-label">Enter Name 1:</label>
+            <input type="text" class="form-control" id="name1" placeholder="Enter first name">
+            <div class="error-label" id="name1Error">* Please enter Name 1.</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="name2" class="form-label">Enter Name 2:</label>
+            <input type="text" class="form-control" id="name2" placeholder="Enter second name">
+            <div class="error-label" id="name2Error">* Please enter Name 2.</div>
+        </div>
+
+        <div class="mb-3">
+            <button type="button" class="btn btn-primary" id="btnCompareNames">Compare Names</button>
+            <span class="output-box" id="nameResult"></span>
+        </div>
+
+        <div class="text-center">
+            <button type="reset" class="btn btn-secondary" id="resetNames">Reset</button>
+        </div>
+    </form>
+
+    <!-- Exercise 2: Compare Numbers -->
+    <form id="numberForm" class="form-container">
+        <h3 class="mb-3 text-success">Exercise 2: Compare Numbers</h3>
+
+        <div class="mb-3">
+            <label for="num1" class="form-label">Enter Number 1:</label>
+            <input type="text" class="form-control" id="num1" placeholder="Enter first number">
+            <div class="error-label" id="num1Error">* Please enter a valid integer for Number 1.</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="num2" class="form-label">Enter Number 2:</label>
+            <input type="text" class="form-control" id="num2" placeholder="Enter second number">
+            <div class="error-label" id="num2Error">* Please enter a valid integer for Number 2.</div>
+        </div>
+
+        <div class="mb-3">
+            <button type="button" class="btn btn-success" id="btnCompareNumbers">Compare Numbers</button>
+            <span class="output-box" id="numResult"></span>
+        </div>
+
+        <div class="text-center">
+            <button type="reset" class="btn btn-secondary" id="resetNumbers">Reset</button>
+        </div>
+    </form>
+</div>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+// --------------------
+// Helper: Show/Hide error messages
+// --------------------
+function showError(id, show) {
+    document.getElementById(id).style.display = show ? "block" : "none";
+}
+
+// --------------------
+// Exercise 1: Compare Names
+// --------------------
+document.getElementById("btnCompareNames").addEventListener("click", () => {
+    const name1 = document.getElementById("name1").value.trim();
+    const name2 = document.getElementById("name2").value.trim();
+    const result = document.getElementById("nameResult");
+
+    let valid = true;
+
+    if (name1 === "") {
+        showError("name1Error", true);
+        valid = false;
+    } else {
+        showError("name1Error", false);
+    }
+
+    if (name2 === "") {
+        showError("name2Error", true);
+        valid = false;
+    } else {
+        showError("name2Error", false);
+    }
+
+    if (!valid) {
+        result.textContent = "";
+        return;
+    }
+
+    if (name1.toLowerCase() === name2.toLowerCase()) {
+        result.textContent = "Same";
+        result.style.color = "green";
+    } else {
+        result.textContent = "Different";
+        result.style.color = "blue";
+    }
+});
+
+document.getElementById("resetNames").addEventListener("click", () => {
+    document.getElementById("nameResult").textContent = "";
+    showError("name1Error", false);
+    showError("name2Error", false);
+});
+
+// --------------------
+// Exercise 2: Compare Numbers
+// --------------------
+document.getElementById("btnCompareNumbers").addEventListener("click", () => {
+    const num1 = document.getElementById("num1").value.trim();
+    const num2 = document.getElementById("num2").value.trim();
+    const result = document.getElementById("numResult");
+
+    let valid = true;
+
+    // Validation: both must be non-empty integers
+    if (num1 === "" || isNaN(num1) || !Number.isInteger(Number(num1))) {
+        showError("num1Error", true);
+        valid = false;
+    } else {
+        showError("num1Error", false);
+    }
+
+    if (num2 === "" || isNaN(num2) || !Number.isInteger(Number(num2))) {
+        showError("num2Error", true);
+        valid = false;
+    } else {
+        showError("num2Error", false);
+    }
+
+    if (!valid) {
+        result.textContent = "";
+        return;
+    }
+
+    const n1 = parseInt(num1);
+    const n2 = parseInt(num2);
+
+    if (n1 === n2) {
+        result.textContent = "Equal";
+        result.style.color = "green";
+    } else if (n1 > n2) {
+        result.textContent = `${n1} is larger`;
+        result.style.color = "blue";
+    } else {
+        result.textContent = `${n2} is larger`;
+        result.style.color = "blue";
+    }
+});
+
+document.getElementById("resetNumbers").addEventListener("click", () => {
+    document.getElementById("numResult").textContent = "";
+    showError("num1Error", false);
+    showError("num2Error", false);
+});
+</script>
+</body>
+</html>
