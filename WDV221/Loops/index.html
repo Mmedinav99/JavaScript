@@ -3,6 +3,59 @@
 <head>
 <meta charset="utf-8">
 <title>WDV221 Intro Javascript - Loops</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8fafc;
+    margin: 40px;
+  }
+
+  h1, h2 {
+    color: #2b4f81;
+  }
+
+  hr {
+    border: 1px solid #ccc;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  
+  div {
+    margin: 10px 0;
+  }
+
+  .number-box {
+    display: inline-block;
+    width: 60px;
+    padding: 8px;
+    margin: 4px;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+  }
+
+  
+  .color0 { background-color: #3498db; }
+  .color1 { background-color: #2ecc71; }
+  .color2 { background-color: #9b59b6; }
+  .color3 { background-color: #f39c12; }
+  .color4 { background-color: #e74c3c; }
+  .color5 { background-color: #1abc9c; }
+  .color6 { background-color: #e67e22; }
+  .color7 { background-color: #8e44ad; }
+  .color8 { background-color: #16a085; }
+  .color9 { background-color: #c0392b; }
+
+  select {
+    padding: 6px;
+    font-size: 16px;
+    border-radius: 5px;
+  }
+</style>
 </head>
 
 <body>
@@ -46,7 +99,7 @@
 let i = 0;
 let whileOutput = "";
 while (i <= 4) {
-  whileOutput += i + "<br>";
+  whileOutput += `<div class="number-box color${i}">${i}</div>`;
   i++;
 }
 document.getElementById("whileLoopOutput").innerHTML = whileOutput;
@@ -55,7 +108,7 @@ document.getElementById("whileLoopOutput").innerHTML = whileOutput;
 // FOR loop that prints numbers 4–0
 let forOutput = "";
 for (let j = 4; j >= 0; j--) {
-  forOutput += j + "<br>";
+  forOutput += `<div class="number-box color${j}">${j}</div>`;
 }
 document.getElementById("forLoopOutput").innerHTML = forOutput;
 
@@ -63,7 +116,7 @@ document.getElementById("forLoopOutput").innerHTML = forOutput;
 // Loop that prints 1–5 in paragraph elements
 let paragraphOutput = "";
 for (let k = 1; k <= 5; k++) {
-  paragraphOutput += "<p>" + k + "</p>";
+  paragraphOutput += `<p class="number-box color${k}">${k}</p>`;
 }
 document.getElementById("paragraphLoopOutput").innerHTML = paragraphOutput;
 
@@ -71,9 +124,11 @@ document.getElementById("paragraphLoopOutput").innerHTML = paragraphOutput;
 // Loop that prints 5, 10, 15... until greater than 40
 let incrementOutput = "";
 let num = 5;
+let colorIndex = 0;
 while (num <= 40) {
-  incrementOutput += num + "<br>";
+  incrementOutput += `<div class="number-box color${colorIndex}">${num}</div>`;
   num += 5;
+  colorIndex = (colorIndex + 1) % 10; // cycle colors
 }
 document.getElementById("incrementLoopOutput").innerHTML = incrementOutput;
 
