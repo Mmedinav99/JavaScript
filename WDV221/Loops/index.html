@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>WDV221 Intro Javascript - Loops</title>
+</head>
+
+<body>
+<h1>WDV221 Intro Javascript</h1>
+<h2>Project-5 Loops Assignment</h2>
+<hr />
+<p>Please complete the following exercises on this page. When complete post this page to your server. Make a link in your WDV221 homework page for this assignment.</p>
+<p>Include a comment in each script with the exercise number and a description of what the script is supposed to do.</p>
+<p>Using Blackboard submit this Assignment.</p>
+<hr />
+<h3>Instructions:</h3>
+<p>Please complete the following exercises using Javascript loops as indicated. Please place your code on this page. Use runtime scripts unless told otherwise.</p>
+
+<!-- ================= Exercise 1 ================= -->
+<p><strong>1.</strong> WHILE loop that prints numbers 0 to 4 each on a separate line:</p>
+<div id="whileLoopOutput"></div>
+
+<!-- ================= Exercise 2 ================= -->
+<p><strong>2.</strong> FOR loop that prints numbers 4 to 0 each on a separate line:</p>
+<div id="forLoopOutput"></div>
+
+<!-- ================= Exercise 3 ================= -->
+<p><strong>3.</strong> Loop that prints 1 to 5 each in its own paragraph element:</p>
+<div id="paragraphLoopOutput"></div>
+
+<!-- ================= Exercise 4 ================= -->
+<p><strong>4.</strong> Loop that prints numbers (5, 10, 15, 20, 25...) until one is greater than 40:</p>
+<div id="incrementLoopOutput"></div>
+
+<!-- ================= Exercise 5 ================= -->
+<p><strong>5.</strong> Loop that prints 6 options (Option 1–Option 6) in the dropdown menu:</p>
+<p>
+  <label>Select an Option!
+    <select name="select" id="select"></select>
+  </label>
+</p>
+
+<script>
+// ================= Exercise 1 =================
+// WHILE loop that prints numbers 0–4
+let i = 0;
+let whileOutput = "";
+while (i <= 4) {
+  whileOutput += i + "<br>";
+  i++;
+}
+document.getElementById("whileLoopOutput").innerHTML = whileOutput;
+
+// ================= Exercise 2 =================
+// FOR loop that prints numbers 4–0
+let forOutput = "";
+for (let j = 4; j >= 0; j--) {
+  forOutput += j + "<br>";
+}
+document.getElementById("forLoopOutput").innerHTML = forOutput;
+
+// ================= Exercise 3 =================
+// Loop that prints 1–5 in paragraph elements
+let paragraphOutput = "";
+for (let k = 1; k <= 5; k++) {
+  paragraphOutput += "<p>" + k + "</p>";
+}
+document.getElementById("paragraphLoopOutput").innerHTML = paragraphOutput;
+
+// ================= Exercise 4 =================
+// Loop that prints 5, 10, 15... until greater than 40
+let incrementOutput = "";
+let num = 5;
+while (num <= 40) {
+  incrementOutput += num + "<br>";
+  num += 5;
+}
+document.getElementById("incrementLoopOutput").innerHTML = incrementOutput;
+
+// ================= Exercise 5 =================
+// Loop that adds 6 options to the dropdown (Option 1–Option 6)
+let selectMenu = document.getElementById("select");
+for (let n = 1; n <= 6; n++) {
+  let option = document.createElement("option");
+  option.text = "Option " + n;
+  selectMenu.add(option);
+}
+</script>
+
+</body>
+</html>
