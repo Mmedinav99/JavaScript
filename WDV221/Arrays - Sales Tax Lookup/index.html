@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>WDV221 Intro Javascript - Arrays</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8fafc;
+    margin: 40px;
+  }
+
+  h1, h2 {
+    color: #2b4f81;
+  }
+
+  hr {
+    border: 1px solid #ccc;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  form {
+    border: thin solid #ccc;
+    border-radius: 8px;
+    background-color: #eaf6ff;
+    padding: 20px;
+    width: 420px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  }
+
+  select {
+    padding: 6px;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 6px;
+  }
+
+  #displayTaxRate {
+    font-weight: bold;
+    color: #2b4f81;
+  }
+
+  input[type="reset"] {
+    padding: 6px 12px;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  input[type="reset"]:hover {
+    background-color: #217dbb;
+  }
+</style>
+</head>
+
+<body>
+<h1>WDV221 Intro Javascript</h1>
+<h2>Project 6 - Arrays Assignment</h2>
+<hr />
+<p>Please complete the following exercises on this page. When complete post this page to your server. Make a link in your WDV221 homework page for this assignment.</p>
+<p>Include a comment in each script with the exercise number and a description of what the script is supposed to do.</p>
+<p>Using Canvas submit this Assignment.</p>
+<hr />
+
+<h3>Lookup Tax Rate Form</h3>
+<p>This form uses arrays to load the values into the dropdown list. It allows the user to select a state, and once selected, displays the corresponding tax rate.</p>
+
+<form id="taxForm" name="taxForm" method="post" action="">
+  <p>
+    Please select a state: <br>
+    <select name="selectState" id="selectState">
+      <option value="">-- Please select a state --</option>
+    </select>
+  </p>
+
+  <p>The sales tax rate is: <span id="displayTaxRate"></span></p>
+
+  <p><input type="reset" id="resetBtn" value="Reset" /></p>
+</form>
+
+<h3>Instructions:</h3>
+<ol>
+  <li>Create an array called <strong>states</strong> that lists the following states in this order: Iowa, Illinois, Missouri, Wisconsin.</li>
+  <li>Create a parallel array called <strong>stateSalesTax</strong> that lists the following values in this order: 6%, 11%, 7%, 8%.</li>
+  <li>Use JavaScript to dynamically load the list of states into the dropdown menu.</li>
+  <li>Create a function called <strong>salesTaxLookup()</strong>.</li>
+  <li>Use the <code>onchange</code> event handler on the select element to run <strong>salesTaxLookup()</strong>.</li>
+  <li>The function will find the state in the <strong>states</strong> array and get the corresponding tax rate from <strong>stateSalesTax</strong>.</li>
+  <li>It will display the tax rate for the selected state.</li>
+</ol>
+
+<script>
+// ================= Arrays Assignment =================
+// This script dynamically populates a dropdown with states,
+// looks up and displays the correct sales tax rate when selected.
+
+// Step 1 & 2: Create the arrays
+const states = ["Iowa", "Illinois", "Missouri", "Wisconsin"];
+const stateSalesTax = ["6%", "11%", "7%", "8%"];
+
+// Step 3: Load states into dropdown on page load
+window.onload = function() {
+  const select = document.getElementById("selectState");
+  for (let i = 0; i < states.length; i++) {
+    let option = document.createElement("option");
+    option.text = states[i];
+    option.value = states[i];
+    select.add(option);
+  }
+
+  // Attach onchange event to dropdown
+  select.onchange = salesTaxLookup;
+
+  // Reset display when form resets
+  document.getElementById("taxForm").onreset = function() {
+    document.getElementById("displayTaxRate").textContent = "";
+  };
+};
+
+// Step 4: Create function to look up and display tax rate
+function salesTaxLookup() {
+  const selectedState = document.getElementById("selectState").value;
+  const display = document.getElementById("displayTaxRate");
+
+  // If no valid state selected
+  if (selectedState === "") {
+    display.textContent = "";
+    return;
+  }
+
+  // Step 6: Find matching state and show tax rate
+  for (let i = 0; i < states.length; i++) {
+    if (states[i] === selectedState) {
+      display.textContent = `Tax rate for ${states[i]} is ${stateSalesTax[i]}`;
+      break;
+    }
+  }
+}
+</script>
+
+</body>
+</html>
