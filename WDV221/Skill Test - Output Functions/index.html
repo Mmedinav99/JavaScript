@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>WDV221 Intro Javascript - Output Functions</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8fafc;
+    margin: 40px;
+  }
+
+  h1, h2 {
+    color: #2b4f81;
+  }
+
+  hr {
+    border: 1px solid #ccc;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  button {
+    padding: 8px 14px;
+    border-radius: 6px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin: 6px 0;
+  }
+
+  button:hover {
+    background-color: #217dbb;
+  }
+
+  #consoleNote {
+    font-style: italic;
+    color: #555;
+  }
+</style>
+</head>
+
+<body>
+<h1>WDV221 Intro Javascript</h1>
+<h2>Skill Test - Output Functions</h2>
+<hr />
+<p>This page demonstrates JavaScript functions that output messages to the console and respond to button clicks.</p>
+<p id="consoleNote">💡 Open your browser console to see the output.</p>
+<hr />
+
+<h3>Function Buttons</h3>
+<p>Click the buttons below to run the functions:</p>
+<button onclick="outputCityName('West Des Moines')">Display WDM</button>
+<button onclick="outputCityName('Bondurant')">Display Bondurant</button>
+
+<h3>Instructions:</h3>
+<ol>
+  <li>Create a function called <strong>displayMessage()</strong> that outputs "Skill Test - Output Functions" to the console.</li>
+  <li>Create a function called <strong>outputCityName()</strong> that accepts a parameter and outputs "You live in [city]".</li>
+  <li>Create a function called <strong>formatOrder()</strong> that accepts product name and quantity, returns a formatted string, and log it to the console.</li>
+  <li>Use <code>onclick</code> event handlers on the buttons to call <strong>outputCityName()</strong> with different city names.</li>
+</ol>
+
+<script>
+// ================= Skill Test - Output Functions =================
+
+// Exercise 1: Display to console
+function displayMessage() {
+  console.log("Skill Test - Output Functions");
+}
+// Call at runtime
+displayMessage();
+
+// Exercise 2: Display City name
+function outputCityName(inCityName) {
+  console.log("You live in " + inCityName);
+}
+// Call at runtime with Ames and Altoona
+outputCityName("Ames");
+outputCityName("Altoona");
+
+// Exercise 3: Return a value
+function formatOrder(productName, productQuantity) {
+  return "You have ordered " + productQuantity + " copies of " + productName;
+}
+// Call at runtime inside console.log
+console.log(formatOrder("Red Stapler", 7));
+
+
+</script>
+
+</body>
+</html>
