@@ -1,0 +1,176 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>WDV221 Intro Javascript - CSS Interactions</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8fafc;
+    margin: 40px;
+  }
+
+  h1, h2 {
+    color: #2b4f81;
+  }
+
+  hr {
+    border: 1px solid #ccc;
+  }
+
+  p {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  button {
+    padding: 6px 12px;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin: 4px 0;
+  }
+
+  button:hover {
+    background-color: #217dbb;
+  }
+
+  #sale {
+    font-weight: bold;
+    font-size: 16px;
+    color: #2b4f81;
+  }
+
+  #frog {
+    width: 150px;
+    height: 100px;
+    transition: all 0.3s ease;
+  }
+</style>
+</head>
+
+<body>
+<h1>WDV221 Intro Javascript</h1>
+<h2>Style Object - CSS Interactions</h2>
+<hr />
+<p>Complete the following exercises using JavaScript and CSS interactions.</p>
+<hr />
+
+<h3 id="cssHeader">CSS Interactions</h3>
+
+<!-- 1 -->
+<p id="para1">Click this paragraph to change the font color to red.</p>
+
+<!-- 2 -->
+<p id="para2">Mouseover this paragraph to center the H3 element containing "CSS Interactions".</p>
+
+<!-- 3 -->
+<button id="btnAlignLeft">Click to left align the H3 element</button>
+
+<!-- 4 & 5 -->
+<p id="para3">Mouseover this paragraph to change the font. Click to return to default.</p>
+
+<!-- 6 & 7 -->
+<p id="sale">SALE</p>
+<button id="btnSaleBig">Make SALE 24px</button>
+<button id="btnSaleSmall">Return SALE size</button>
+
+<!-- 8 -->
+<p id="para4">Click this paragraph to make background yellow.</p>
+
+<!-- 9 & 10 -->
+<img id="frog" src="frog.jpg" alt="frog">
+<br>
+<button id="btnHideFrog">Hide Frog</button>
+<button id="btnShowFrog">Show Frog</button>
+
+<!-- 11 & 12 -->
+<p>Mouseover the Frog image to double its size. Click to return to original size.</p>
+
+<!-- 13 & 14 -->
+<p id="borderPara">Doubleclick on this paragraph to place a border around it.</p>
+<p id="removeBorder">Click here to remove the border from the previous paragraph.</p>
+
+<!-- 15 -->
+<p id="para5">Mouseover this paragraph to turn background green. Mouseoff returns to normal.</p>
+
+<script>
+// ================= CSS Interactions Assignment =================
+
+// 1: Click paragraph to change font color
+document.getElementById("para1").onclick = function() {
+  this.style.color = "red";
+};
+
+// 2: Mouseover paragraph to center H3
+document.getElementById("para2").onmouseover = function() {
+  document.getElementById("cssHeader").style.textAlign = "center";
+};
+
+// 3: Button to left align H3
+document.getElementById("btnAlignLeft").onclick = function() {
+  document.getElementById("cssHeader").style.textAlign = "left";
+};
+
+// 4 & 5: Mouseover to change font, click to reset
+document.getElementById("para3").onmouseover = function() {
+  this.style.fontFamily = "Courier New";
+};
+document.getElementById("para3").onclick = function() {
+  this.style.fontFamily = "initial";
+};
+
+// 6 & 7: Buttons to resize SALE
+document.getElementById("btnSaleBig").onclick = function() {
+  document.getElementById("sale").style.fontSize = "24px";
+};
+document.getElementById("btnSaleSmall").onclick = function() {
+  document.getElementById("sale").style.fontSize = "16px";
+};
+
+// 8: Click paragraph to make background yellow
+document.getElementById("para4").onclick = function() {
+  this.style.backgroundColor = "yellow";
+};
+
+// 9 & 10: Hide/Show Frog
+document.getElementById("btnHideFrog").onclick = function() {
+  document.getElementById("frog").style.display = "none";
+};
+document.getElementById("btnShowFrog").onclick = function() {
+  document.getElementById("frog").style.display = "inline";
+};
+
+// 11 & 12: Mouseover Frog to double size, click to reset
+document.getElementById("frog").onmouseover = function() {
+  this.style.width = "300px";
+  this.style.height = "200px";
+};
+document.getElementById("frog").onclick = function() {
+  this.style.width = "150px";
+  this.style.height = "100px";
+};
+
+// 13: Doubleclick paragraph to add border
+document.getElementById("borderPara").ondblclick = function() {
+  this.style.border = "2px solid black";
+};
+
+// 14: Remove border
+document.getElementById("removeBorder").onclick = function() {
+  document.getElementById("borderPara").style.border = "none";
+};
+
+// 15: Mouseover paragraph to turn green, mouseout to reset
+document.getElementById("para5").onmouseover = function() {
+  this.style.backgroundColor = "green";
+};
+document.getElementById("para5").onmouseout = function() {
+  this.style.backgroundColor = "initial";
+};
+</script>
+
+</body>
+</html>
