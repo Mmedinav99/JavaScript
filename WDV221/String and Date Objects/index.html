@@ -1,0 +1,111 @@
+<script>
+    // -------------------------------
+    // STRING OBJECT ASSIGNMENT
+    // -------------------------------
+
+    function validateEmail(email) {
+        if (email === "" || !email.includes("@")) {
+            alert("Please enter a valid email address.");
+            return false;
+        }
+        return true;
+    }
+
+    function displayEmail() {
+        const email = document.getElementById("inEmail").value;
+        if (!validateEmail(email)) return;
+        document.querySelector(".flexContainer div:nth-child(1)").textContent = "Email Address: " + email;
+    }
+
+    function displayUsername() {
+        const email = document.getElementById("inEmail").value;
+        if (!validateEmail(email)) return;
+        const username = email.substring(0, email.indexOf("@"));
+        document.querySelector(".flexContainer div:nth-child(2)").textContent = "Username: " + username;
+    }
+
+    function displayDomain() {
+        const email = document.getElementById("inEmail").value;
+        if (!validateEmail(email)) return;
+        const domain = email.substring(email.indexOf("@") + 1);
+        const domainDiv = document.querySelector(".flexContainer div:nth-child(3)");
+        domainDiv.textContent = "Domain Name: " + domain;
+
+        // Highlight if .edu
+        if (domain.endsWith(".edu")) {
+            domainDiv.style.backgroundColor = "lightblue";
+        } else {
+            domainDiv.style.backgroundColor = "";
+        }
+    }
+
+    // Reset form and display fields
+    document.querySelector("input[type='reset']").addEventListener("click", function() {
+        document.querySelector(".flexContainer div:nth-child(1)").textContent = "Email Address:";
+        document.querySelector(".flexContainer div:nth-child(2)").textContent = "Username:";
+        document.querySelector(".flexContainer div:nth-child(3)").textContent = "Domain Name:";
+        document.querySelector(".flexContainer div:nth-child(3)").style.backgroundColor = "";
+    });
+
+    // Attach event listeners to buttons
+    const buttons = document.querySelectorAll(".flexContainer input[type='submit']");
+    buttons[0].addEventListener("click", function(event) {
+        event.preventDefault();
+        displayEmail();
+    });
+    buttons[1].addEventListener("click", function(event) {
+        event.preventDefault();
+        displayUsername();
+    });
+    buttons[2].addEventListener("click", function(event) {
+        event.preventDefault();
+        displayDomain();
+    });
+
+    // -------------------------------
+    // DATE OBJECT ASSIGNMENT
+    // -------------------------------
+
+    function formatMMDDYYYY(inputDate) {
+        const mm = String(inputDate.getMonth() + 1).padStart(2, "0");
+        const dd = String(inputDate.getDate()).padStart(2, "0");
+        const yyyy = inputDate.getFullYear();
+        return mm + "/" + dd + "/" + yyyy;
+    }
+
+    function friendlyDate(inputDate) {
+        const options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
+        return inputDate.toLocaleDateString("en-US", options);
+    }
+
+    // Date buttons
+    const dateButtons = document.querySelectorAll("section:nth-of-type(2) button");
+    const dateSpans = document.querySelectorAll("section:nth-of-type(2) span");
+
+    dateButtons[0].addEventListener("click", function() {
+        const today = new Date();
+        dateSpans[0].textContent = formatMMDDYYYY(today);
+    });
+
+    dateButtons[1].addEventListener("click", function() {
+        const today = new Date();
+        dateSpans[1].textContent = friendlyDate(today);
+    });
+
+    dateButtons[2].addEventListener("click", function() {
+        dateSpans[0].textContent = "";
+        dateSpans[1].textContent = "";
+    });
+
+    // -------------------------------
+    // FOOTER YEAR UPDATE
+    // -------------------------------
+
+    function updateFooterYear() {
+        const year = new Date().getFullYear();
+        const footer = document.querySelector("footer p");
+        footer.innerHTML = `Copyright &#169 ${year} DMACC All rights reserved.`;
+    }
+
+    updateFooterYear(); 
+</script>
