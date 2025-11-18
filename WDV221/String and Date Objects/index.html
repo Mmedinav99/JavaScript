@@ -1,111 +1,187 @@
-<script>
-    // -------------------------------
-    // STRING OBJECT ASSIGNMENT
-    // -------------------------------
-
-    function validateEmail(email) {
-        if (email === "" || !email.includes("@")) {
-            alert("Please enter a valid email address.");
-            return false;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WDV221 Intro JavaScript - String and Date Objects</title>
+    <style>
+        form {
+            width:500px;
+            margin-left:auto;
+            margin-right:auto;
+            background-color:beige;
+            padding:10px;
         }
-        return true;
-    }
 
-    function displayEmail() {
-        const email = document.getElementById("inEmail").value;
-        if (!validateEmail(email)) return;
-        document.querySelector(".flexContainer div:nth-child(1)").textContent = "Email Address: " + email;
-    }
-
-    function displayUsername() {
-        const email = document.getElementById("inEmail").value;
-        if (!validateEmail(email)) return;
-        const username = email.substring(0, email.indexOf("@"));
-        document.querySelector(".flexContainer div:nth-child(2)").textContent = "Username: " + username;
-    }
-
-    function displayDomain() {
-        const email = document.getElementById("inEmail").value;
-        if (!validateEmail(email)) return;
-        const domain = email.substring(email.indexOf("@") + 1);
-        const domainDiv = document.querySelector(".flexContainer div:nth-child(3)");
-        domainDiv.textContent = "Domain Name: " + domain;
-
-        // Highlight if .edu
-        if (domain.endsWith(".edu")) {
-            domainDiv.style.backgroundColor = "lightblue";
-        } else {
-            domainDiv.style.backgroundColor = "";
+        .flexContainer {
+            display:flex;
+            flex-direction: column;
+            align-items:center;
         }
-    }
 
-    // Reset form and display fields
-    document.querySelector("input[type='reset']").addEventListener("click", function() {
-        document.querySelector(".flexContainer div:nth-child(1)").textContent = "Email Address:";
-        document.querySelector(".flexContainer div:nth-child(2)").textContent = "Username:";
-        document.querySelector(".flexContainer div:nth-child(3)").textContent = "Domain Name:";
-        document.querySelector(".flexContainer div:nth-child(3)").style.backgroundColor = "";
-    });
+        .flexContainer input {
+            width:300px;
+            margin-bottom: 10px;
+        }
 
-    // Attach event listeners to buttons
-    const buttons = document.querySelectorAll(".flexContainer input[type='submit']");
-    buttons[0].addEventListener("click", function(event) {
-        event.preventDefault();
-        displayEmail();
-    });
-    buttons[1].addEventListener("click", function(event) {
-        event.preventDefault();
-        displayUsername();
-    });
-    buttons[2].addEventListener("click", function(event) {
-        event.preventDefault();
-        displayDomain();
-    });
+        form section div {
+            margin-bottom:10px;
+        }
+        
+        footer {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>WDV221 Intro JavaScript</h1>
+    <h2>JavaScript Objects - String and Date Objects</h2>
+    
+    <!-- STRING ASSIGNMENT -->
+    <section class="stringAssignment">
+        <h3>String Object Assignment:</h3>
+        <form method="post" action="#">
+            <p>
+                <label for="inEmail">Enter an Email Address: </label>
+                <input type="email" name="inEmail" id="inEmail">
+            </p>
 
-    // -------------------------------
-    // DATE OBJECT ASSIGNMENT
-    // -------------------------------
+            <p class="flexContainer">
+                <input type="submit" value="Display Email Address">
+                <input type="submit" value="Display the Username of the Email Address">
+                <input type="submit" value="Display the Domain name of the Email Address">
+            </p>
 
-    function formatMMDDYYYY(inputDate) {
-        const mm = String(inputDate.getMonth() + 1).padStart(2, "0");
-        const dd = String(inputDate.getDate()).padStart(2, "0");
-        const yyyy = inputDate.getFullYear();
-        return mm + "/" + dd + "/" + yyyy;
-    }
+            <section class="flexContainer">
+                <div>Email Address:</div>
+                <div>Username:</div>
+                <div>Domain Name:</div>
+            </section>
 
-    function friendlyDate(inputDate) {
-        const options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
-        return inputDate.toLocaleDateString("en-US", options);
-    }
+            <p style="text-align: center;">
+                <input type="reset" value="Enter New Email">
+            </p>
+        </form>
+    </section>
+    
+    <!-- DATE ASSIGNMENT -->
+    <section>
+        <h3>Date Object Assignment:</h3>
+        <div>
+            <p>
+                <button id="btnToday">Todays Date</button>
+                <span id="todayDate"></span>
+            </p>
+        </div>
+        <p>
+            <button id="btnFriendly">Friendly Date</button>
+            Today is: <span id="friendlyDate"></span>
+        </p>
+        <div>
+            <p>
+                <button id="btnResetDate">Reset Date Examples</button>
+            </p>
+        </div>
+    </section>
+    
+    <!-- FOOTER -->
+    <footer>
+        <p id="footerCopy">Copyright &#169 1844 DMACC All rights reserved.</p>
+    </footer>
 
-    // Date buttons
-    const dateButtons = document.querySelectorAll("section:nth-of-type(2) button");
-    const dateSpans = document.querySelectorAll("section:nth-of-type(2) span");
+    <!-- JAVASCRIPT -->
+    <script>
+        // STRING FUNCTIONS
+        function displayEmail() {
+            const email = document.getElementById("inEmail").value;
+            if (email === "") {
+                alert("Please enter a valid email address.");
+                return;
+            }
+            document.querySelector(".flexContainer div:nth-child(1)").textContent = "Email Address: " + email;
+        }
 
-    dateButtons[0].addEventListener("click", function() {
-        const today = new Date();
-        dateSpans[0].textContent = formatMMDDYYYY(today);
-    });
+        function displayUsername() {
+            const email = document.getElementById("inEmail").value;
+            if (email === "" || !email.includes("@")) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+            const username = email.substring(0, email.indexOf("@"));
+            document.querySelector(".flexContainer div:nth-child(2)").textContent = "Username: " + username;
+        }
 
-    dateButtons[1].addEventListener("click", function() {
-        const today = new Date();
-        dateSpans[1].textContent = friendlyDate(today);
-    });
+        function displayDomain() {
+            const email = document.getElementById("inEmail").value;
+            if (email === "" || !email.includes("@")) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+            const domain = email.substring(email.indexOf("@") + 1);
+            const domainDiv = document.querySelector(".flexContainer div:nth-child(3)");
+            domainDiv.textContent = "Domain Name: " + domain;
 
-    dateButtons[2].addEventListener("click", function() {
-        dateSpans[0].textContent = "";
-        dateSpans[1].textContent = "";
-    });
+            // Highlight if .edu
+            if (domain.endsWith(".edu")) {
+                domainDiv.style.backgroundColor = "lightblue";
+            } else {
+                domainDiv.style.backgroundColor = "";
+            }
+        }
 
-    // -------------------------------
-    // FOOTER YEAR UPDATE
-    // -------------------------------
+        // Reset form and outputs
+        document.querySelector("input[type='reset']").addEventListener("click", function() {
+            document.querySelector(".flexContainer div:nth-child(1)").textContent = "Email Address:";
+            document.querySelector(".flexContainer div:nth-child(2)").textContent = "Username:";
+            document.querySelector(".flexContainer div:nth-child(3)").textContent = "Domain Name:";
+            document.querySelector(".flexContainer div:nth-child(3)").style.backgroundColor = "";
+        });
 
-    function updateFooterYear() {
-        const year = new Date().getFullYear();
-        const footer = document.querySelector("footer p");
-        footer.innerHTML = `Copyright &#169 ${year} DMACC All rights reserved.`;
-    }
+        // Attach event listeners to buttons
+        const buttons = document.querySelectorAll(".flexContainer input[type='submit']");
+        buttons[0].addEventListener("click", function(event) {
+            event.preventDefault();
+            displayEmail();
+        });
+        buttons[1].addEventListener("click", function(event) {
+            event.preventDefault();
+            displayUsername();
+        });
+        buttons[2].addEventListener("click", function(event) {
+            event.preventDefault();
+            displayDomain();
+        });
 
-    updateFooterYear(); 
-</script>
+        // DATE FUNCTIONS
+        function formatMMDDYYYY(inputDate) {
+            const mm = String(inputDate.getMonth() + 1).padStart(2, '0');
+            const dd = String(inputDate.getDate()).padStart(2, '0');
+            const yyyy = inputDate.getFullYear();
+            return mm + "/" + dd + "/" + yyyy;
+        }
+
+        function friendlyDate(inputDate) {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            return inputDate.toLocaleDateString("en-US", options);
+        }
+
+        // Date buttons
+        document.getElementById("btnToday").addEventListener("click", function() {
+            document.getElementById("todayDate").textContent = formatMMDDYYYY(new Date());
+        });
+
+        document.getElementById("btnFriendly").addEventListener("click", function() {
+            document.getElementById("friendlyDate").textContent = friendlyDate(new Date());
+        });
+
+        document.getElementById("btnResetDate").addEventListener("click", function() {
+            document.getElementById("todayDate").textContent = "";
+            document.getElementById("friendlyDate").textContent = "";
+        });
+
+        // FOOTER YEAR UPDATE
+        document.getElementById("footerCopy").innerHTML = 
+            "Copyright &#169 " + new Date().getFullYear() + " DMACC All rights reserved.";
+    </script>
+</body>
+</html>
