@@ -1,5 +1,6 @@
 // JavaScript Document
 
+// Greeting function
 function greeting(inLocation) {
     let greetingBlock = document.querySelector("#" + inLocation);   
     greetingBlock.style.color = "#483D8B";
@@ -7,7 +8,7 @@ function greeting(inLocation) {
     greetingBlock.style.textAlign = "center";           
 
     let today = new Date(); 
-    let currentTime = today.getHours(); 
+    let currentTime = today.getHours();  
 
     if (currentTime >= 6 && currentTime < 12) {
         greetingBlock.innerHTML = "Good Morning!";
@@ -16,10 +17,9 @@ function greeting(inLocation) {
     } else {
         greetingBlock.innerHTML = "Good Evening!";
     }
-}//end greeting()
+}
 
-
-// Display today's date in format: Wednesday, November 19, 2025
+// Display today's date in format: Sunday June 17, 2015
 function displayDate(inLocation) {
     let dateBlock = document.querySelector("#" + inLocation);
     let today = new Date();
@@ -28,8 +28,7 @@ function displayDate(inLocation) {
     let formattedDate = today.toLocaleDateString('en-US', options);
 
     dateBlock.innerHTML = formattedDate;
-}//end displayDate()
-
+}
 
 // Update copyright with symbol and current year
 function updateCopyright(inLocation) {
@@ -37,4 +36,4 @@ function updateCopyright(inLocation) {
     let year = new Date().getFullYear();
 
     copyrightBlock.innerHTML = "&copy; " + year + " DMACC All rights reserved";
-}//end updateCopyright()
+}
