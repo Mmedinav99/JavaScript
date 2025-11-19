@@ -1,14 +1,12 @@
-// JavaScript Document
-
 // Greeting function
 function greeting(inLocation) {
-    let greetingBlock = document.querySelector("#" + inLocation);   
+    let greetingBlock = document.querySelector("#" + inLocation);
     greetingBlock.style.color = "#483D8B";
-    greetingBlock.style.fontSize = "150%";                          
-    greetingBlock.style.textAlign = "center";           
+    greetingBlock.style.fontSize = "150%";
+    greetingBlock.style.textAlign = "center";
 
-    let today = new Date(); 
-    let currentTime = today.getHours();  
+    let today = new Date();
+    let currentTime = today.getHours();
 
     if (currentTime >= 6 && currentTime < 12) {
         greetingBlock.innerHTML = "Good Morning!";
@@ -19,14 +17,19 @@ function greeting(inLocation) {
     }
 }
 
-// Display today's date in format: Sunday June 17, 2015
+// Display today's date in format: Wendnesday November 19, 2025
 function displayDate(inLocation) {
     let dateBlock = document.querySelector("#" + inLocation);
+
     let today = new Date();
+    let options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    };
 
-    let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     let formattedDate = today.toLocaleDateString('en-US', options);
-
     dateBlock.innerHTML = formattedDate;
 }
 
