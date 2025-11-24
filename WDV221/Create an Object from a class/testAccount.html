@@ -20,26 +20,24 @@
     }
   </style>
 </head>
-<body onload="initializeHandlers()">
+<body>
 
   <h1>Bank Account Event Handler Test</h1>
 
-  <!-- Deposit button with HTML click handler -->
+  <!-- Deposit controls -->
   <label for="depositAmount">Deposit Amount:</label>
   <input type="number" id="depositAmount" placeholder="Enter amount">
-  <button onclick="htmlDepositHandler()">Deposit</button>
+  <button id="depositBtn">Deposit</button>
 
-  <!-- Withdraw button with HTML click handler -->
+  <!-- Withdraw controls -->
   <label for="withdrawAmount">Withdraw Amount:</label>
   <input type="number" id="withdrawAmount" placeholder="Enter amount">
-  <button onclick="htmlWithdrawHandler()">Withdraw</button>
+  <button id="withdrawBtn">Withdraw</button>
 
-  <!-- Paragraph with HTML mouseover handler -->
-  <p onmouseover="htmlMouseOverHandler()" id="hoverText">
-    Hover over this paragraph to see account info.
-  </p>
+  <!-- Paragraph to hover -->
+  <p id="hoverText">Hover over this paragraph to see account info.</p>
 
-  <!-- Select element to choose transaction type -->
+  <!-- Select element -->
   <label for="transactionSelect">Choose transaction type:</label>
   <select id="transactionSelect">
     <option value="">--Select--</option>
@@ -66,47 +64,7 @@
     myAccount.accountNumber = "123456";
     myAccount.accountName = "John Doe";
 
-    // HTML event handler functions
-    function htmlDepositHandler() {
-      const amount = parseFloat(document.getElementById("depositAmount").value);
-      try {
-        myAccount.deposit(amount);
-        updateDisplay();
-        console.log("Deposit event triggered.");
-      } catch (error) {
-        alert(error.message);
-      }
-    }
-
-    function htmlWithdrawHandler() {
-      const amount = parseFloat(document.getElementById("withdrawAmount").value);
-      try {
-        myAccount.withdraw(amount);
-        updateDisplay();
-        console.log("Withdraw event triggered.");
-      } catch (error) {
-        alert(error.message);
-      }
-    }
-
-    function htmlMouseOverHandler() {
-      console.log("Mouseover event triggered on paragraph.");
-      updateDisplay();
-    }
-
-    // JavaScript event handler setup
-    function initializeHandlers() {
-      // Select change event
-      const select = document.getElementById("transactionSelect");
-      select.onchange = function () {
-        if (this.value === "balance") {
-          alert("Current Balance: " + myAccount.balance());
-        }
-        console.log(`Transaction type selected: ${this.value}`);
-      };
-    }
-
-    // Update display area
+    // Update display function
     function updateDisplay() {
       document.getElementById("accountName").textContent = "Name: " + myAccount.accountName;
       document.getElementById("accountNumber").textContent = "Number: " + myAccount.accountNumber;
@@ -120,6 +78,47 @@
         list.appendChild(li);
       });
     }
+
+    // Event handlers
+    function depositHandler() {
+      const amount = parseFloat(document.getElementById("depositAmount").value);
+      try {
+        myAccount.deposit(amount);
+        updateDisplay();
+        console.log("Deposit event triggered.");
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+
+    function withdrawHandler() {
+      const amount = parseFloat(document.getElementById("withdrawAmount").value);
+      try {
+        myAccount.withdraw(amount);
+        updateDisplay();
+        console.log("Withdraw event triggered.");
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+
+    function hoverHandler() {
+      console.log("Mouseover event triggered on paragraph.");
+      updateDisplay();
+    }
+
+    function selectHandler(event) {
+      if (event.target.value === "balance") {
+        alert("Current Balance: " + myAccount.balance());
+      }
+      console.log(`Transaction type selected: ${event.target.value}`);
+    }
+
+    // Attach event listeners
+    document.getElementById("depositBtn").addEventListener("click", depositHandler);
+    document.getElementById("withdrawBtn").addEventListener("click", withdrawHandler);
+    document.getElementById("hoverText").addEventListener("mouseover", hoverHandler);
+    document.getElementById("transactionSelect").addEventListener("change", selectHandler);
 
     // Initial display
     updateDisplay();
