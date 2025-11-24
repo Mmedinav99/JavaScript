@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bank Account Event Handler Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .output {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      background: #f9f9f9;
+    }
+    input, button, select {
+      margin: 5px 0;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body onload="initializeHandlers()">
+
+  <h1>Bank Account Event Handler Test</h1>
+
+  <!-- Deposit button with HTML click handler -->
+  <label for="depositAmount">Deposit Amount:</label>
+  <input type="number" id="depositAmount" placeholder="Enter amount">
+  <button onclick="htmlDepositHandler()">Deposit</button>
+
+  <!-- Withdraw button with HTML click handler -->
+  <label for="withdrawAmount">Withdraw Amount:</label>
+  <input type="number" id="withdrawAmount" placeholder="Enter amount">
+  <button onclick="htmlWithdrawHandler()">Withdraw</button>
+
+  <!-- Paragraph with HTML mouseover handler -->
+  <p onmouseover="htmlMouseOverHandler()" id="hoverText">
+    Hover over this paragraph to see account info.
+  </p>
+
+  <!-- Select element to choose transaction type -->
+  <label for="transactionSelect">Choose transaction type:</label>
+  <select id="transactionSelect">
+    <option value="">--Select--</option>
+    <option value="deposit">Deposit</option>
+    <option value="withdraw">Withdraw</option>
+    <option value="balance">Check Balance</option>
+  </select>
+
+  <!-- Output area -->
+  <div class="output" id="outputArea">
+    <h2>Account Info</h2>
+    <p id="accountName"></p>
+    <p id="accountNumber"></p>
+    <p id="accountBalance"></p>
+    <h2>Transactions</h2>
+    <ul id="transactionList"></ul>
+  </div>
+
+  <script type="module">
+    import BankAccount from './BankAccount.js';
+
+    // Create a new account
+    const myAccount = new BankAccount(500);
+    myAccount.accountNumber = "123456";
+    myAccount.accountName = "John Doe";
+
+    // HTML event handler functions
+    function htmlDepositHandler() {
+      const amount = parseFloat(document.getElementById("depositAmount").value);
+      try {
+        myAccount.deposit(amount);
+        updateDisplay();
+        console.log("Deposit event triggered.");
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+
+    function htmlWithdrawHandler() {
+      const amount = parseFloat(document.getElementById("withdrawAmount").value);
+      try {
+        myAccount.withdraw(amount);
+        updateDisplay();
+        console.log("Withdraw event triggered.");
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+
+    function htmlMouseOverHandler() {
+      console.log("Mouseover event triggered on paragraph.");
+      updateDisplay();
+    }
+
+    // JavaScript event handler setup
+    function initializeHandlers() {
+      // Select change event
+      const select = document.getElementById("transactionSelect");
+      select.onchange = function () {
+        if (this.value === "balance") {
+          alert("Current Balance: " + myAccount.balance());
+        }
+        console.log(`Transaction type selected: ${this.value}`);
+      };
+    }
+
+    // Update display area
+    function updateDisplay() {
+      document.getElementById("accountName").textContent = "Name: " + myAccount.accountName;
+      document.getElementById("accountNumber").textContent = "Number: " + myAccount.accountNumber;
+      document.getElementById("accountBalance").textContent = "Balance: " + myAccount.balance();
+
+      const list = document.getElementById("transactionList");
+      list.innerHTML = "";
+      myAccount.accountTransactions.forEach(t => {
+        const li = document.createElement("li");
+        li.textContent = `${t.transactionDate} - ${t.transactionType} - ${t.transactionAmount}`;
+        list.appendChild(li);
+      });
+    }
+
+    // Initial display
+    updateDisplay();
+  </script>
+
+</body>
+</html>
