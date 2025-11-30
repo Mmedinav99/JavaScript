@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>WDV221 Intro Javascript - Book Objects</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8fafc;
+    margin: 40px;
+  }
+
+  h1, h2 {
+    color: #2b4f81;
+  }
+
+  hr {
+    border: 1px solid #ccc;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  #bookContainer {
+    border: thin solid #ccc;
+    border-radius: 8px;
+    background-color: #eaf6ff;
+    padding: 20px;
+    width: 600px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .bookCard {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .bookCard:last-child {
+    border-bottom: none;
+  }
+
+  strong {
+    color: #2b4f81;
+  }
+
+  pre {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 6px;
+    overflow-x: auto;
+  }
+</style>
+</head>
+
+<body>
+<h1>WDV221 Intro Javascript</h1>
+<h2>Objects & JSON Assignment</h2>
+<hr />
+<p>Please complete the following exercises on this page. When complete post this page to your server. Make a link in your WDV221 homework page for this assignment.</p>
+<p>Include a comment in each script with the exercise number and a description of what the script is supposed to do.</p>
+<p>Using Canvas submit this Assignment.</p>
+<hr />
+
+<h3>Book Objects Display</h3>
+<p>This section uses parallel arrays to create book objects, applies a student discount method, and displays them on the page. It also converts objects into JSON format and logs them to the console.</p>
+
+<div id="bookContainer"></div>
+
+<h3>Instructions:</h3>
+<ol>
+  <li>Create three book objects (<strong>bookA</strong>, <strong>bookB</strong>, <strong>bookC</strong>) using object literal syntax.</li>
+  <li>Each object contains <code>book_title</code>, <code>book_author</code>, <code>book_price</code>, and a method <code>studentDiscountPrice()</code> that returns the price discounted by 20%.</li>
+  <li>Display each book’s details on the console and on the web page.</li>
+  <li>Create an object <strong>booksArrayObject</strong> that stores all three books in an array.</li>
+  <li>Loop through <strong>booksArrayObject</strong> to display each book on the page.</li>
+  <li>Convert <strong>bookA</strong> and <strong>booksArrayObject</strong> into JSON objects and display them in the console.</li>
+</ol>
+
+<script>
+// ================= Objects Assignment =================
+// Part 1: Create book objects from parallel arrays
+
+let bookTitles = ["Beginning Javascript", "Logic with ES6", "Javascript Ojbects Made Easy"];
+let bookPrices = [19.99, 29.49, 999.99];
+let bookAuthor = ["Smith", "Johson-Parker", "Westin"];
+
+// Create book objects
+let bookA = {
+  book_title: bookTitles[0],
+  book_author: bookAuthor[0],
+  book_price: bookPrices[0],
+  studentDiscountPrice: function() {
+    return `$${(this.book_price * 0.8).toFixed(2)}`;
+  }
+};
+
+let bookB = {
+  book_title: bookTitles[1],
+  book_author: bookAuthor[1],
+  book_price: bookPrices[1],
+  studentDiscountPrice: function() {
+    return `$${(this.book_price * 0.8).toFixed(2)}`;
+  }
+};
+
+let bookC = {
+  book_title: bookTitles[2],
+  book_author: bookAuthor[2],
+  book_price: bookPrices[2],
+  studentDiscountPrice: function() {
+    return `$${(this.book_price * 0.8).toFixed(2)}`;
+  }
+};
+
+// Display objects in console
+console.log("Book A:", bookA);
+console.log("Book B:", bookB);
+console.log("Book C:", bookC);
+
+// Create booksArrayObject
+let booksArrayObject = {
+  books: [bookA, bookB, bookC]
+};
+
+console.log("Books Array Object:", booksArrayObject);
+
+// Display books on webpage
+let container = document.getElementById("bookContainer");
+booksArrayObject.books.forEach(book => {
+  container.innerHTML += `
+    <div class="bookCard">
+      <p><strong>Title:</strong> ${book.book_title}</p>
+      <p><strong>Author:</strong> ${book.book_author}</p>
+      <p><strong>Price:</strong> $${book.book_price.toFixed(2)}</p>
+      <p><strong>Student Discount Price:</strong> ${book.studentDiscountPrice()}</p>
+    </div>
+  `;
+});
+
+// ================= Part 2: JSON Conversion =================
+let bookAJSON = JSON.stringify(bookA);
+console.log("Book A JSON Object:", bookAJSON);
+
+let booksArrayJSON = JSON.stringify(booksArrayObject);
+console.log("Books Array JSON Object:", booksArrayJSON);
+</script>
+
+</body>
+</html>
