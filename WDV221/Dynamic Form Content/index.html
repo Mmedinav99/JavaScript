@@ -51,6 +51,12 @@
   input[type="submit"]:hover, input[type="reset"]:hover {
     background-color: #1a3359;
   }
+
+  #message {
+    margin-top: 20px;
+    font-weight: bold;
+    color: green;
+  }
 </style>
 </head>
 
@@ -81,6 +87,8 @@
     <input type="reset" value="Reset">
   </fieldset>
 </form>
+
+<div id="message"></div>
 
 <h3>Instructions:</h3>
 <ol>
@@ -131,6 +139,13 @@ references.forEach(ref => {
   label.appendChild(checkbox);
   label.appendChild(document.createTextNode(" " + ref));
   referenceContainer.appendChild(label);
+});
+
+// ================= Submission Handler =================
+document.forms["form1"].addEventListener("submit", function(event) {
+  event.preventDefault(); 
+  document.getElementById("message").innerText = "Thank you! Your form has been submitted.";
+  this.reset(); 
 });
 </script>
 
