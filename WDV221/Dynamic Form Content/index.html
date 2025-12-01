@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>WDV221 Skill Test - Dynamic Form Content</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8fafc;
+    margin: 40px;
+  }
+
+  h1, h2 {
+    color: #2b4f81;
+  }
+
+  hr {
+    border: 1px solid #ccc;
+  }
+
+  fieldset {
+    border: thin solid #ccc;
+    border-radius: 8px;
+    background-color: #eaf6ff;
+    padding: 20px;
+    width: 600px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  }
+
+  legend {
+    font-weight: bold;
+    color: #2b4f81;
+  }
+
+  label {
+    display: block;
+    margin: 8px 0;
+    font-size: 16px;
+  }
+
+  input[type="submit"], input[type="reset"] {
+    margin-top: 12px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: none;
+    background-color: #2b4f81;
+    color: white;
+    cursor: pointer;
+  }
+
+  input[type="submit"]:hover, input[type="reset"]:hover {
+    background-color: #1a3359;
+  }
+</style>
+</head>
+
+<body>
+<h1>WDV221 Intro Javascript</h1>
+<h2>Skill Test - Loops and Arrays</h2>
+<hr />
+<p>This assignment uses arrays to dynamically populate form elements (select menu, radio buttons, checkboxes) with JavaScript loops.</p>
+<hr />
+
+<form name="form1" method="post" action="">
+  <fieldset>
+    <legend>Your Input Matters</legend>
+
+    <!-- Question 1: Product Selection -->
+    <label for="selectProduct">1. Which product did you purchase?</label>
+    <select name="selectProduct" id="selectProduct"></select>
+
+    <!-- Question 2: Selection Factor -->
+    <p>2. Please choose the primary factor in why you purchased our product:</p>
+    <div id="factorContainer"></div>
+
+    <!-- Question 3: References -->
+    <p>3. How did you hear about us? Please select all that apply:</p>
+    <div id="referenceContainer"></div>
+
+    <input type="submit" value="Submit">
+    <input type="reset" value="Reset">
+  </fieldset>
+</form>
+
+<h3>Instructions:</h3>
+<ol>
+  <li>Use the <code>products</code> and <code>productNumber</code> arrays to populate the select menu.</li>
+  <li>Use the <code>selectionFactors</code> array to create radio buttons.</li>
+  <li>Use the <code>references</code> array to create checkboxes.</li>
+</ol>
+
+<script>
+// ================= Loops & Arrays Assignment =================
+
+// Arrays provided
+var products = ["Garden Trowel","Yard Spade","Planting Spade"];
+var productNumber = ["gt200","yard-1","plant-4"];
+var selectionFactors = ["Price","Quality","Reviews","Pictures"];
+var references = ["Field and Stream","Home and Garden","Plant Life"];
+
+// Part 1: Populate select menu with products
+let selectMenu = document.getElementById("selectProduct");
+for (let i = 0; i < products.length; i++) {
+  let option = document.createElement("option");
+  option.value = productNumber[i];   
+  option.text = products[i];         
+  selectMenu.appendChild(option);
+}
+
+// Part 2: Create radio buttons for selectionFactors
+let factorContainer = document.getElementById("factorContainer");
+selectionFactors.forEach(factor => {
+  let label = document.createElement("label");
+  let radio = document.createElement("input");
+  radio.type = "radio";
+  radio.name = "factor";   
+  radio.value = factor;
+  label.appendChild(radio);
+  label.appendChild(document.createTextNode(" " + factor));
+  factorContainer.appendChild(label);
+});
+
+// Part 3: Create checkboxes for references
+let referenceContainer = document.getElementById("referenceContainer");
+references.forEach(ref => {
+  let label = document.createElement("label");
+  let checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.name = "reference";
+  checkbox.value = ref;
+  label.appendChild(checkbox);
+  label.appendChild(document.createTextNode(" " + ref));
+  referenceContainer.appendChild(label);
+});
+</script>
+
+</body>
+</html>
