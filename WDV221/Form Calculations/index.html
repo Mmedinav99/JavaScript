@@ -56,6 +56,24 @@
     font-weight: bold;
     color: #2b4f81;
   }
+
+  table {
+    margin-top: 20px;
+    border-collapse: collapse;
+    width: 600px;
+    background-color: #fff;
+  }
+
+  table, th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #2b4f81;
+    color: white;
+  }
 </style>
 </head>
 
@@ -92,6 +110,35 @@
   </fieldset>
 </form>
 
+<!-- Breakdown Table -->
+<h3>Sales Breakdown by Product</h3>
+<table id="salesTable">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Total Quantity</th>
+      <th>Total Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Garden Trowel</td>
+      <td id="qty-trowel">0</td>
+      <td id="price-trowel">$0.00</td>
+    </tr>
+    <tr>
+      <td>Yard Spade</td>
+      <td id="qty-yard">0</td>
+      <td id="price-yard">$0.00</td>
+    </tr>
+    <tr>
+      <td>Planting Spade</td>
+      <td id="qty-plant">0</td>
+      <td id="price-plant">$0.00</td>
+    </tr>
+  </tbody>
+</table>
+
 <script>
   let totalSales = 0;
 
@@ -100,16 +147,37 @@
   const totalSalesDisplay = document.getElementById("totalSales");
   const clearButton = document.getElementById("clearOrder");
 
+  // Track per-product totals
+  let productTotals = {
+    "Garden Trowel": { qty: 0, total: 0 },
+    "Yard Spade": { qty: 0, total: 0 },
+    "Planting Spade": { qty: 0, total: 0 }
+  };
+
   // Format as US currency
   function formatCurrency(amount) {
     return amount.toLocaleString("en-US", { style: "currency", currency: "USD" });
+  }
+
+  // Update breakdown table
+  function updateTable() {
+    document.getElementById("qty-trowel").textContent = productTotals["Garden Trowel"].qty;
+    document.getElementById("price-trowel").textContent = formatCurrency(productTotals["Garden Trowel"].total);
+
+    document.getElementById("qty-yard").textContent = productTotals["Yard Spade"].qty;
+    document.getElementById("price-yard").textContent = formatCurrency(productTotals["Yard Spade"].total);
+
+    document.getElementById("qty-plant").textContent = productTotals["Planting Spade"].qty;
+    document.getElementById("price-plant").textContent = formatCurrency(productTotals["Planting Spade"].total);
   }
 
   // Handle Submit Order
   form.addEventListener("submit", function(event) {
     event.preventDefault();
 
-    const productPrice = parseFloat(document.getElementById("selectProduct").value);
+    const select = document.getElementById("selectProduct");
+    const productName = select.options[select.selectedIndex].text.split(" - ")[0];
+    const productPrice = parseFloat(select.value);
     const numPurchased = parseInt(document.getElementById("numPurchased").value);
 
     if (isNaN(numPurchased) || numPurchased <= 0) {
@@ -122,6 +190,12 @@
 
     totalSales += salePrice;
     totalSalesDisplay.textContent = formatCurrency(totalSales);
+
+    // Update product totals
+    productTotals[productName].qty += numPurchased;
+    productTotals[productName].total += salePrice;
+
+    updateTable();
   });
 
   // Reset button clears form fields and salePrice only
@@ -129,12 +203,19 @@
     salePriceDisplay.textContent = formatCurrency(0);
   });
 
-  // Clear Order button resets everything including totalSales
+  // Clear Order button resets everything including totalSales and table
   clearButton.addEventListener("click", function() {
     form.reset();
     salePriceDisplay.textContent = formatCurrency(0);
     totalSales = 0;
     totalSalesDisplay.textContent = formatCurrency(0);
+
+    // Reset product totals
+    for (let key in productTotals) {
+      productTotals[key].qty = 0;
+      productTotals[key].total = 0;
+    }
+    updateTable();
   });
 </script>
 
