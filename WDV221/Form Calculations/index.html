@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>WDV221 Skill Test - Form Calculations</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8fafc;
+    margin: 40px;
+  }
+
+  h1, h2 {
+    color: #2b4f81;
+  }
+
+  hr {
+    border: 1px solid #ccc;
+  }
+
+  fieldset {
+    border: thin solid #ccc;
+    border-radius: 8px;
+    background-color: #eaf6ff;
+    padding: 20px;
+    width: 600px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  }
+
+  legend {
+    font-weight: bold;
+    color: #2b4f81;
+  }
+
+  label {
+    display: block;
+    margin: 8px 0;
+    font-size: 16px;
+  }
+
+  input[type="submit"], input[type="reset"], button {
+    margin-top: 12px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: none;
+    background-color: #2b4f81;
+    color: white;
+    cursor: pointer;
+  }
+
+  input[type="submit"]:hover, input[type="reset"]:hover, button:hover {
+    background-color: #1a3359;
+  }
+
+  #salePrice, #totalSales {
+    font-weight: bold;
+    color: #2b4f81;
+  }
+</style>
+</head>
+
+<body>
+<h1>WDV221 Intro Javascript</h1>
+<h2>Skill Test - Form Calculations</h2>
+<hr />
+
+<form id="orderForm">
+  <fieldset>
+    <legend>Purchase Order</legend>
+
+    <!-- Product Selection -->
+    <label for="selectProduct">Products available to Purchase:</label>
+    <select id="selectProduct" name="selectProduct">
+      <option value="19.99">Garden Trowel - $19.99</option>
+      <option value="29.99">Yard Spade - $29.99</option>
+      <option value="24.99">Planting Spade - $24.99</option>
+    </select>
+
+    <!-- Number Purchased -->
+    <label for="numPurchased">Number Purchased:</label>
+    <input type="number" id="numPurchased" name="numPurchased" min="1" step="1" required>
+
+    <!-- Sale Price -->
+    <p>Sale Price for this purchase: <span id="salePrice">$0.00</span></p>
+
+    <!-- Total Sales -->
+    <p>Total Sales for all purchases: <span id="totalSales">$0.00</span></p>
+
+    <input type="submit" value="Submit Order">
+    <input type="reset" value="Reset">
+    <button type="button" id="clearOrder">Clear Order</button>
+  </fieldset>
+</form>
+
+<script>
+  let totalSales = 0;
+
+  const form = document.getElementById("orderForm");
+  const salePriceDisplay = document.getElementById("salePrice");
+  const totalSalesDisplay = document.getElementById("totalSales");
+  const clearButton = document.getElementById("clearOrder");
+
+  // Format as US currency
+  function formatCurrency(amount) {
+    return amount.toLocaleString("en-US", { style: "currency", currency: "USD" });
+  }
+
+  // Handle Submit Order
+  form.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const productPrice = parseFloat(document.getElementById("selectProduct").value);
+    const numPurchased = parseInt(document.getElementById("numPurchased").value);
+
+    if (isNaN(numPurchased) || numPurchased <= 0) {
+      alert("Please enter a valid whole number for quantity.");
+      return;
+    }
+
+    const salePrice = productPrice * numPurchased;
+    salePriceDisplay.textContent = formatCurrency(salePrice);
+
+    totalSales += salePrice;
+    totalSalesDisplay.textContent = formatCurrency(totalSales);
+  });
+
+  // Reset button clears form fields and salePrice only
+  form.addEventListener("reset", function() {
+    salePriceDisplay.textContent = formatCurrency(0);
+  });
+
+  // Clear Order button resets everything including totalSales
+  clearButton.addEventListener("click", function() {
+    form.reset();
+    salePriceDisplay.textContent = formatCurrency(0);
+    totalSales = 0;
+    totalSalesDisplay.textContent = formatCurrency(0);
+  });
+</script>
+
+</body>
+</html>
