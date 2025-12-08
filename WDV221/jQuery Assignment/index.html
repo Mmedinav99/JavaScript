@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>WDV221 Intro Javascript - jQuery Assignment</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8fafc;
+    margin: 40px;
+  }
+
+  h1, h2 {
+    color: #2b4f81;
+  }
+
+  hr {
+    border: 1px solid #ccc;
+  }
+
+  fieldset {
+    border: thin solid #ccc;
+    border-radius: 8px;
+    background-color: #eaf6ff;
+    padding: 20px;
+    width: 600px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  }
+
+  legend {
+    font-weight: bold;
+    color: #2b4f81;
+  }
+
+  label {
+    display: block;
+    margin: 8px 0;
+    font-size: 16px;
+  }
+
+  input[type="submit"], input[type="reset"] {
+    margin-top: 12px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: none;
+    background-color: #2b4f81;
+    color: white;
+    cursor: pointer;
+  }
+
+  input[type="submit"]:hover, input[type="reset"]:hover {
+    background-color: #1a3359;
+  }
+
+  #resultsDisplay {
+    font-weight: bold;
+    color: #2b4f81;
+  }
+</style>
+
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+<h1>WDV221 Intro Javascript</h1>
+<h2>UNIT-14 jQuery Assignment</h2>
+<hr />
+
+<form id="calcForm">
+  <fieldset>
+    <legend>Addition Form</legend>
+
+    <!-- Value 1 -->
+    <label for="inValue1">Enter a number for Value 1:</label>
+    <input type="text" id="inValue1" name="inValue1">
+
+    <!-- Value 2 -->
+    <label for="inValue2">Enter a number for Value 2:</label>
+    <input type="text" id="inValue2" name="inValue2">
+
+    <!-- Results -->
+    <p>Results: <span id="resultsDisplay"></span></p>
+
+    <input type="submit" value="Addition">
+    <input type="reset" value="Reset">
+  </fieldset>
+</form>
+
+<script>
+$(document).ready(function() {
+  // Handle Addition button
+  $("#calcForm").on("submit", function(event) {
+    event.preventDefault(); // prevent form submission
+
+    let val1 = parseFloat($("#inValue1").val());
+    let val2 = parseFloat($("#inValue2").val());
+
+    if (isNaN(val1) || isNaN(val2)) {
+      $("#resultsDisplay").text("Please enter valid numbers.");
+      return;
+    }
+
+    let sum = val1 + val2;
+    $("#resultsDisplay").text(sum);
+  });
+
+  // Handle Reset button
+  $("#calcForm").on("reset", function() {
+    $("#resultsDisplay").text("");
+  });
+});
+</script>
+
+</body>
+</html>
