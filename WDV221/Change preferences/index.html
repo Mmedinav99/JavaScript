@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>WDV221 Intro Javascript - Setting Preferences</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8fafc;
+    margin: 40px;
+  }
+
+  h1, h2 {
+    color: #2b4f81;
+  }
+
+  hr {
+    border: 1px solid #ccc;
+  }
+
+  fieldset {
+    border: thin solid #ccc;
+    border-radius: 8px;
+    background-color: #eaf6ff;
+    padding: 20px;
+    width: 600px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+  }
+
+  legend {
+    font-weight: bold;
+    color: #2b4f81;
+  }
+
+  label {
+    display: block;
+    margin: 8px 0;
+    font-size: 16px;
+  }
+
+  input[type="button"], select {
+    margin-top: 8px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: none;
+    background-color: #2b4f81;
+    color: white;
+    cursor: pointer;
+  }
+
+  input[type="button"]:hover {
+    background-color: #1a3359;
+  }
+
+  #resultsDisplay {
+    font-weight: bold;
+    color: #2b4f81;
+  }
+
+  #fontPreview {
+    margin-top: 12px;
+    padding: 10px;
+    border: 1px dashed #2b4f81;
+    background-color: #fff;
+    font-size: 18px;
+    text-align: center;
+  }
+</style>
+
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+<h1>WDV221 Intro Javascript</h1>
+<h2>Skill Test - Setting Preferences</h2>
+<hr />
+
+<!-- Background Color Section -->
+<form id="colorForm">
+  <fieldset>
+    <legend>Choose your background color:</legend>
+    <input type="button" value="Red" onclick="changeColor('red')">
+    <input type="button" value="Green" onclick="changeColor('green')">
+    <input type="button" value="Blue" onclick="changeColor('blue')">
+  </fieldset>
+</form>
+
+<!-- Font Selection Section -->
+<form id="fontForm">
+  <fieldset>
+    <legend>Choose your font:</legend>
+    <label for="fontSelect">Select a font:</label>
+    <select id="fontSelect"></select>
+    <div id="fontPreview">Sample Text Preview</div>
+  </fieldset>
+</form>
+
+<script>
+// Function to change background color
+function changeColor(color) {
+  document.body.style.backgroundColor = color;
+}
+
+$(document).ready(function() {
+  // Fonts array
+  let pageFonts = ["Arial", "Courier New", "Georgia", "Verdana"];
+
+  // Populate dropdown
+  let fontSelect = $("#fontSelect");
+  $.each(pageFonts, function(index, font) {
+    fontSelect.append($("<option></option>").val(font).text(font));
+  });
+
+  // Change font preview and page font
+  fontSelect.on("change", function() {
+    let selectedFont = $(this).val();
+    $("#fontPreview").css("font-family", selectedFont);
+    $("body").css("font-family", selectedFont);
+  });
+
+
+});
+</script>
+
+</body>
+</html>
